@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head></head>
+
+<body>
+  <form id="form" method="post" >
+    <input type="file" name="pdf" id="pdf" accept=".pdf">
+    <button type="submit">Submit</button>
+  </form>
+  <div id="content"></div>
+  <div id="responseContainer"></div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.js" integrity="sha512-dfMpvQclalfL7nRtHdy4+U2GLYb2XJJOgGLgKibrbcbarI/ZLgCAaBCS6+AuWN0OtLn/zFpu+Cggd8TCBYx9Ag==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script>
+    let content;
+    var myform = document.getElementById("form");
+    let userInput;
+    myform.addEventListener("submit", doo);
+    function doo(e) {
+      e.preventDefault();
+      pdfjsLib.GlobalWorkerOptions.workerSrc =
+        'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.js';
+      function extractText(pdfUrl) {
+        var pdf = pdfjsLib.getDocument(pdfUrl);
+        return pdf.promise.then(function (pdf) {
+          var totalPageCount = pdf.numPages;
+          var countPromises = [];
+          for (
+            var currentPage = 1;
+            currentPage <= totalPageCount;
+            currentPage++
+          ) {
+            var page = pdf.getPage(currentPage);
+            countPromises.push(
+              page.then(function (page) {
+                var textContent = page.getTextContent();
+                return textContent.then(function (text) {
+                  return text.items
+                    .map(function (s) {
+                      return s.str;
+                    })
+                    .join('');
+                });
+              }),
+            );
+          }
+
+          return Promise.all(countPromises).then(function (texts) {
+            return texts.join('');
+          });
+        });
+      }
+
+      var input = document.getElementById('pdf');
+      const file = input.files[0];
+      const url = window.URL.createObjectURL(file);
+      extractText(url).then(
+        function (text) {
+          document.getElementById('content').innerHTML = text;
+          content = text;
+          console.log(content);
+          // sendMessage(content);
+        },
+        function (reason) {
+          console.error(reason);
+        },
+      );
+    }
+
+    const API_KEY = "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";
+    const contanier = document.getElementById('responseContainer');
+
+    const sendMessage = (content) => {
+      const API_URL = "https://api.openai.com/v1/chat/completions";
+
+      // Define the properties and message for the API request
+      const requestOptions = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${API_KEY}`
+        },
+        body: JSON.stringify({
+          model: "gpt-3.5-turbo",
+          messages: [{ role: "user", content: `Generate questions for the quizz from the following text : ${content} }`}],
+        })
+      }
+
+      // Send POST request to API, get response and set the reponse as paragraph text
+      fetch(API_URL, requestOptions).then(res => res.json()).then(data => {
+        contanier.textContent = data.choices[0].message.content.trim();
+      }).catch(() => {
+        contanier.textContent = " Oops! Something went wrong. Please try again.";
+      })
+    }
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,217 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    scroll-behavior: smooth;
+    -webkit-user-drag:  none;
+}
+
+html {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    max-width: 100vw;
+    background-color: aliceblue;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+.container::-webkit-scrollbar {
+    width: 14px;
+}
+
+.container::-webkit-scrollbar-thumb {
+    border: 4px solid rgba(194, 32, 32, 0);
+    background-clip: padding-box;
+    border-radius: 9999px;
+    background-color: #AAAAAA;
+}
+
+nav {
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgb(218, 255, 255);
+    backdrop-filter: blur(5px);
+    height: clamp(50px, 8vh, 80px);
+    min-height: clamp(50px, 8vh, 150px);
+    box-shadow: 0 0 10px 2px rgb(125, 146, 155);
+    margin-bottom: 2px;
+    animation: nav_animation .3s  1 forwards ease-out;
+    transform: translateY(-100%);
+}
+@keyframes nav_animation {
+    from{
+        transform: translateY(-100%);
+    }
+    to{
+        transform: translateY(0);
+    }
+}
+nav *{
+    opacity: 0;
+    animation: navitems_animation .5s .2s ease-in 1 forwards ;
+}
+@keyframes navitems_animation {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+nav img {
+    height: 100%;
+    width: 10%;
+    object-fit: contain;
+}
+
+.navlist {
+    display: flex;
+    align-items: center;
+    padding-right: 40px;
+}
+
+.navlist li {
+    list-style: none;
+    padding: 0 20px;
+}
+
+.navlist li:is(.active) {
+    padding: 10px 20px;
+    background: rgb(255, 255, 255);
+    border-radius: 8px;
+    box-shadow: 0 0 5px 2px rgb(125, 146, 155);
+    transition: box-shadow .5s;
+}
+
+.navlist li a {
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+}
+
+.container {
+    height: clamp(92svh,92vh,92dvh);
+    overflow-y: scroll;
+}
+
+header {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    place-items: center;
+    text-align: center;
+    animation: header_animation 1s ease-in-out 1 forwards ;
+}
+@keyframes header_animation {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+header img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+    animation: logo_animation 1s ease-out 1 forwards ;
+}
+@keyframes logo_animation {
+    from{
+        transform: translateX(-20%);
+        scale: .8;
+    }
+    to{
+    transform: translateX(0);
+    scale: 1;
+    }
+}
+
+header h1 {
+    font-size: xxx-large;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    max-width: 10ch;
+    height: 3ch;
+}
+
+section {
+    width: 100%;
+    display: grid;
+    place-items: center;
+}
+
+section div {
+    text-align: center;
+    font-size: larger;
+    padding: 8% 0%;
+    width: 60%;
+}
+
+section div:is(.full_width) {
+    background-color: rgb(228, 228, 228);
+    width: 100%;
+    padding: 8% 15%;
+    text-wrap: balance;
+
+    &:is(.master) {
+        background-color: rgb(78, 78, 78);
+        color: azure;
+    }
+}
+
+section div:is(:not(.full_width)) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+    justify-content: center;
+}
+
+section div:is(:not(.full_width)) p {
+    line-height: 1.2em;
+    width: clamp(250px, 30%, 400px);
+    padding: 3%;
+    /* border: solid 2px black; */
+    border-radius: 4px;
+    box-shadow: 0 0 5px 2px rgb(125, 146, 155);
+    background-color: white;
+}
+
+div:is(:not(.full_width)) h2 {
+    flex: 1 0 100%;
+
+}
+
+div h2 {
+    margin-bottom: 1.5em;
+    font-size: xx-large;
+}
+
+div:is(:not(.full_width)) >p{
+    display: grid;
+    grid-template-rows: 1ch auto;
+}
+
+div:is(:not(.full_width)) >p b{
+    place-self: center;
+    white-space: nowrap;
+}
+
+footer {
+    text-align: center;
+    background-color: black;
+    color: white;
+    margin-top: 2em;
+    padding: 2em;
+}

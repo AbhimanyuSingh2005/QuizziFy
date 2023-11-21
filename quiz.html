@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuizifyPDF | Make Quiz</title>
+    <link rel="shortcut icon" href="logo2.png" type="image/x-icon">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <nav>
+        <img src="/asset/img/logo2.png" alt="logo" class="logo" height="500" width="500">
+        <ul class="navlist">
+          <li><a href="index.html">Introduction</a></li>
+          <li class="active"><a href="quiz.html">Make a Quiz</a></li>
+          <li class="nav_contact"><a href="#contact_container">Join us</a></li>
+        </ul>
+      </nav>
+    <div class="container" id="container">
+        <section class="form">
+            <h2>Upload the Pdf to generate questions</h2>
+            <form method="post" id="form">
+                <!-- <label for="pdf">upload PDF </label> -->
+                <input type="file" name="pdf" id="pdf" accept=".pdf">
+                <label for="initialpage">From page </label>
+                <input type="number" name="initialpage" id="initialpage">
+                <label for="finalpage">to page </label>
+                <input type="number" name="finalpage" id="finalpage">
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+        <section class="output">
+            <div class="" id="content"></div>
+            <div class="" id="responseContainer"></div>
+        </section>
+        <section class="contact">
+            <div class="full_width master" id="contact_container">
+              <h2>Join the Quiz Revolution Today !</h2>
+              <p>
+                Ready to transform the way you create quizzes? Join <b>QuizifyPDF</b> today and experience the simplicity of
+                turning PDFs into interactive quizzes. Elevate your content, engage your audience, and save valuable time.
+                Welcome to the future of quiz creation!
+              </p>
+            </div>
+          </section>
+          <footer id="footer">
+            <p>© 2023 QuizifyPDF</p>
+          </footer>
+    </div>
+    <script src="js/script.js"></script>
+    <script src="/js/quiz_script.js"></script>
+</body>
+
+</html>
