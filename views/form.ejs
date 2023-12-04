@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuizifyPDF | Make Quiz</title>
+  <link rel="shortcut icon" href="logo2.png" type="image/x-icon">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/form_style.css">
+</head>
+
+<body>
+  <nav>
+    <img src="/asset/img/logo2.png" alt="logo" class="logo" height="500" width="500">
+    <ul class="navlist">
+      <li><a href="index.html">Introduction</a></li>
+      <li class="active"><a href="form.html">Make a Quiz</a></li>
+      <li class="nav_contact"><a href="#contact_container">Join us</a></li>
+    </ul>
+  </nav>
+  <div class="container" id="container">
+    <form class="hero_section" method="post" id="form" onsubmit="submit()" action="/createQuiz">
+      <div class="selection_area">
+        <div class="select_pdf">
+          <img src="https://www.pcworld.com/wp-content/uploads/2023/11/pdf-icon-2.jpg?quality=50&strip=all" alt=""
+            height="80px" width="100px">
+          <input type="file" name="pdf" id="pdf" accept=".pdf" onchange="pdfselected()" required>
+          <label for="pdf" class="select_button">
+            Select PDF
+          </label>
+          <p class="select_button_para">
+            or drag and drop pdf here
+          </p>
+        </div>
+        <div class="select_text">
+          <textarea name="quizContent" id="text" rows="10" placeholder="Enter the text if you don't have pdf" onchange="textentered()"></textarea>
+        </div>
+      </div>
+      <div class="submit_area">
+        <!-- <div>
+          <input type="radio" name="type" id="mcq" value="mcq" checked>
+          <label for="mcq">
+            MCQ
+          </label>
+        </div> -->
+        <!-- <div>
+          <input type="radio" name="type" id="tf" value="tf" checked>
+          <label for="tf">
+            True/False
+          </label>
+        </div> -->
+        <div>
+          <label for="index_start">
+            <!-- Enter the starting index -->
+            From Page
+          </label>
+          <input type="number" id="index_start" name="" disabled required>
+          <label for="index_end">
+            <!-- Enter the ending index -->
+            To Page
+          </label>
+          <input type="number" id="index_end" name="" disabled required>
+          <label for="difficulty">Set difficulty </label>
+          <input type="range" name="difficulty" id="difficulty" value="1" min="1" max="10" disabled required>
+          <p id="difficulty_value"></p>
+        </div>
+        <button type="submit" id="submit_button" class="submit_button" disabled>Submit</button>
+      </div>
+    </form>
+    <section class="contact">
+      <div class="full_width master" id="contact_container">
+        <h2>Join the Quiz Revolution Today !</h2>
+        <p>
+          Ready to transform the way you create quizzes? Join <b>QuizifyPDF</b> today and experience the simplicity of
+          turning PDFs into interactive quizzes. Elevate your content, engage your audience, and save valuable time.
+          Welcome to the future of quiz creation!
+        </p>
+      </div>
+    </section>
+    <footer id="footer">
+      <p>© 2023 QuizifyPDF</p>
+    </footer>
+  </div>
+  <script src="js/script.js"></script>
+  <script src="/js/form_script.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.js"
+    integrity="sha512-dfMpvQclalfL7nRtHdy4+U2GLYb2XJJOgGLgKibrbcbarI/ZLgCAaBCS6+AuWN0OtLn/zFpu+Cggd8TCBYx9Ag=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</body>
+
+</html>

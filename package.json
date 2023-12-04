@@ -1,0 +1,21 @@
+{
+  "name": "quizfy",
+  "version": "1.0.0",
+  "description": "It is a web app which create quiz for your preparation from your pdf and content",
+  "main": "app.js",
+  "scripts": {
+    "test": "nodemon app.js",
+    "start": "node app.js"
+  },
+  "author": "Abhimanyu, Aryan",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "mongoose": "^8.0.2",
+    "openai": "^4.20.1",
+    "request-ip": "^3.3.0",
+    "uuid": "^9.0.1"
+  }
+}

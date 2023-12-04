@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuizifyPDF | QUiz</title>
+    <link rel="shortcut icon" href="/asset/img/logo2.png" type="image/x-icon">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/quiz_platform_style.css">
+
+<body>
+    <nav>
+        <img src="/asset/img/logo2.png" alt="logo" class="logo" height="500" width="500">
+        <!-- <ul class="navlist">
+            <li class="active"><a href="index.html">Introduction</a></li>
+            <li><a href="form.html">Make a Quiz</a></li>
+            <li class="nav_contact"><a href="#contact_container">Join us</a></li>
+        </ul> -->
+        <div>
+            Quiz Title
+        </div>
+    </nav>
+    <div class="container" id="container">
+        <div class="question_list_container">
+            <div class="heading">Question List</div>
+            <div class="question_list">
+                <div data="answered">Q1</div>
+                <div data="unanswered">Q2</div>
+                <div data="active">Q3</div>
+                <div data="unanswered">Q4</div>
+            </div>
+            <div class="question_list_details">
+                <div class="answered">
+                    <div class="answered_color details_color"></div>
+                    <div class="details_text"> - Answered</div>
+                </div>
+                <div class="unanswered">
+                    <div class="unanswered_color details_color"></div>
+                    <div class="details_text"> - Unanswered</div>
+                </div>
+                <div class="active">
+                    <div class="active_color details_color"></div>
+                    <div class="details_text"> - Active</div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <form class="questions" method="post" action="/ques">
+                <div class="question_container">
+                    <div class="question">
+                        <div class="heading">Question <%= no  %> </div>
+                        <div class="question_text"><%= question %></div>
+                    </div>
+                    <div class="option_container">
+                        <div class="option">
+                            <input type="radio" name="answer" id="option_1" value="0">
+                            <label for="option_1" class="option_text"> <%= options[0] %></label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="answer" id="option_2" value="1">
+                            <label for="option_2" class="option_text"> <%= options[1] %></label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="answer" id="option_3" value="2">
+                            <label for="option_3" class="option_text"> <%= options[2] %></label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="answer" id="option_4" value="3">
+                            <label for="option_4" class="option_text"> <%= options[3] %></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="button_container">
+                    <input type="text" name="quizId" value="<%= id %>" id="quizId">
+                    <% if(no!=10){ %>
+                        <button name="quesNo" value="<%= no %>" class="button next" type="submit" id="prev_button"> Next</button>
+                    <% } %>
+                    <button type="button" id="open_modal">Submit</button>
+                </div>
+                <dialog class="modal">
+                    <p>Do you want to Submit the Quiz <br>
+                    <sub>You wont be able to edit your response after submition</sub></p>
+                    <button type="button" id="close_modal" class="next">Cancel</button>
+                    <button name="quesNo" value="10" type="submit" id="question_submit">Submit</button>
+                </dialog>
+            </form>
+                
+        </div>
+        <!-- <div></div> -->
+    </div>
+    <script src="js/quiz_platform.js"></script>
+</body>
+
+</html>

@@ -42,7 +42,7 @@ nav {
     justify-content: space-between;
     align-items: center;
     background: rgb(218, 255, 255);
-    backdrop-filter: blur(5px);
+    /* backdrop-filter: blur(5px); */
     height: clamp(50px, 8vh, 80px);
     min-height: clamp(50px, 8vh, 150px);
     box-shadow: 0 0 10px 2px rgb(125, 146, 155);
@@ -105,54 +105,13 @@ nav img {
     overflow-y: scroll;
 }
 
-header {
-    height: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    place-items: center;
-    text-align: center;
-    animation: header_animation 1s ease-in-out 1 forwards ;
-}
-@keyframes header_animation {
-    from{
-        opacity: 0;
-    }
-    to{
-        opacity: 1;
-    }
-}
-
-header img {
-    height: 100%;
-    width: 100%;
-    object-fit: contain;
-    animation: logo_animation 1s ease-out 1 forwards ;
-}
-@keyframes logo_animation {
-    from{
-        transform: translateX(-20%);
-        scale: .8;
-    }
-    to{
-    transform: translateX(0);
-    scale: 1;
-    }
-}
-
-header h1 {
-    font-size: xxx-large;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    max-width: 10ch;
-    height: 3ch;
-}
-
 section {
     width: 100%;
     display: grid;
     place-items: center;
 }
 
-section div {
+section>div {
     text-align: center;
     font-size: larger;
     padding: 8% 0%;
@@ -162,12 +121,12 @@ section div {
 section div:is(.full_width) {
     background-color: rgb(228, 228, 228);
     width: 100%;
-    padding: 8% 15%;
     text-wrap: balance;
 
     &:is(.master) {
         background-color: rgb(78, 78, 78);
         color: azure;
+        padding: 8% 15%;
     }
 }
 
@@ -198,7 +157,7 @@ div h2 {
     font-size: xx-large;
 }
 
-div:is(:not(.full_width)) >p{
+/* div:is(:not(.full_width)) >p{
     display: grid;
     grid-template-rows: 1ch auto;
 }
@@ -206,7 +165,7 @@ div:is(:not(.full_width)) >p{
 div:is(:not(.full_width)) >p b{
     place-self: center;
     white-space: nowrap;
-}
+} */
 
 footer {
     text-align: center;

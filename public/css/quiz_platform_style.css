@@ -1,0 +1,154 @@
+nav>div {
+    width: 100%;
+    text-align: center;
+    font-size: larger;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.container {
+    background-color: rgb(229, 249, 255);
+    max-height: calc(92dvh - 2em);
+    padding: 0;
+    margin: 1em 2em;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    display: grid;
+    grid-template-columns: 22% 78% ;
+    /* column-gap: 1%; */
+    /* overflow: hidden; */
+}
+
+.container>div {
+    border: solid 2px black;
+    padding: 1em;
+    background-color: rgb(255, 255, 255);
+    border-radius: 4px;
+    box-shadow: 0 0 5px 2px rgb(125, 146, 155);
+    margin: 1em;
+}
+
+.container>div:is(:nth-child(2)) {
+    overflow-y: scroll;
+}
+
+.container>div:is(:nth-child(2))::-webkit-scrollbar {
+    width: 14px;
+}
+
+.container>div:is(:nth-child(2))::-webkit-scrollbar-thumb {
+    border: 4px solid rgba(194, 32, 32, 0);
+    background-clip: padding-box;
+    border-radius: 9999px;
+    background-color: #AAAAAA;
+}
+
+.question_list {
+    display: flex;
+    flex-wrap: wrap;
+    height: fit-content;
+    justify-content: baseline;
+    gap: .5em;
+}
+.question_list>div[data="answered"] {
+    background-color: rgb(132, 213, 162);
+}
+.question_list>div[data="unanswered"] {
+    background-color: rgb(197, 194, 194);
+}
+.question_list>div[data="active"] {
+    background-color: rgb(97, 153, 222);
+}
+
+.question_list>div:not(.heading) {
+    height: 4em;
+    width: 4em;
+    border-radius: 5px;
+    font-weight: bold;
+    display: grid;
+    place-items: center;
+}
+.question_list_container>.question_list_details{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin: 5em auto;
+    align-self:stretch;
+}
+.question_list_container>.question_list_details>div{
+    display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 1em;
+    justify-content: start;
+    align-items: center;
+    margin-bottom: 1em;
+}
+.question_list_container>.question_list_details>div>.details_color{
+    height: 2em;
+    width: 2em;
+    background-color: antiquewhite;
+}
+.heading{
+    font-size: 1.2em;
+    margin-bottom: 2em;
+    flex :0 1 100%;
+    text-align: center;
+    font-weight: bold;
+    background-color: white;
+}
+.questions{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 1em 2em;
+}
+.questions .question_text{
+    font-size: 1.2em;
+    margin: 1em auto;
+}
+.questions .option{
+    margin: .5em auto;
+    text-wrap: balance;
+}
+.button_container{
+    margin-top: 2em;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+button, .next{
+    width: 10em;
+    height: 3em;
+    border-radius: 5px;
+    border: none;
+    background-color: rgb(132, 198, 213);
+    font-size: 1.2em;
+    font-weight: bold;
+    cursor: pointer;
+}
+button:hover, .next:hover{
+    background-color: rgb(97, 153, 222, .8);
+}
+button,button[id="open_modal"]{
+    background-color: rgba(222, 105, 97, 1);
+}
+button:hover,button[id="open_modal"]:hover{
+    background-color: rgb(235, 50, 37);
+}
+.modal{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    padding: 1em 2em;
+    text-align: center;
+}
+.modal p{
+    margin-bottom: 2em;
+}
+:modal::backdrop{
+    background-color: rgba(0, 0, 0, 0.5);
+}
+#quizId{
+    display: none;
+}
