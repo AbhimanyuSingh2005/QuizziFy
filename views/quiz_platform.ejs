@@ -25,10 +25,25 @@
         <div class="question_list_container">
             <div class="heading">Question List</div>
             <div class="question_list">
-                <div data="answered">Q1</div>
+                <% answer.forEach((ans,index)=>{ %>
+                    <% if(index == no-1) { %>
+                        <a href="/">
+                        <div data="active" class="question_list_item"><%= index+1 %></div>
+                        </a>
+                    <% } else if(ans == 4) { %>
+                        <a href="/quiz?id=<%= id %>&no=<%= index+1 %>">
+                            <div data="unanswered" class="question_list_item"><%= index+1 %></div>
+                        </a>
+                    <% } else{ %>
+                        <a href="/quiz?id=<%= id %>&no=<% index+1 %>">
+                            <div data="answered" class="question_list_item"><%= index+1 %></div>
+                        </a>
+                    <% } %>
+                <% }) %>
+                <!-- <div data="answered">Q1</div>
                 <div data="unanswered">Q2</div>
                 <div data="active">Q3</div>
-                <div data="unanswered">Q4</div>
+                <div data="unanswered">Q4</div> -->
             </div>
             <div class="question_list_details">
                 <div class="answered">
@@ -72,15 +87,19 @@
                     </div>
                 </div>
                 <div class="button_container">
-                    <input type="text" name="quizId" value="<%= id %>" id="quizId">
+                    <input type="hidden" name="quizId" value="<%= id %>" id="quizId">
                     <% if(no!=10){ %>
-                        <button name="quesNo" value="<%= no %>" class="button next" type="submit" id="prev_button"> Next</button>
+                        <button name="quesNo" value="<%= no %>" class="button next" type="submit" id="prev_button">Next</button>
                     <% } %>
                     <button type="button" id="open_modal">Submit</button>
                 </div>
                 <dialog class="modal">
                     <p>Do you want to Submit the Quiz <br>
                     <sub>You wont be able to edit your response after submition</sub></p>
+                    <div>
+                        <label for="question_id">Your Name : </label>
+                        <input type="text" name="name" placeholder="Your Name">
+                    </div>
                     <button type="button" id="close_modal" class="next">Cancel</button>
                     <button name="quesNo" value="10" type="submit" id="question_submit">Submit</button>
                 </dialog>

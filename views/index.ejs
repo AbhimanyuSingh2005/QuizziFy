@@ -14,7 +14,7 @@
   <nav>
     <img src="/asset/img/logo2.png" alt="logo" class="logo" height="500" width="500">
     <ul class="navlist">
-      <li class="active"><a href="index.html">Introduction</a></li>
+      <li class="active"><a href="/index">Introduction</a></li>
       <li><a href="/form">Make a Quiz</a></li>
       <li class="nav_contact"><a href="#contact_container">Join us</a></li>
     </ul>
@@ -25,6 +25,17 @@
         QuizifyPDF</h1>
       <img src="/asset/img/logo2.png" alt="logo" class="logo" height="500" width="500">
     </header>
+    <section>
+      <div class="full_width master" >
+        <h2>Join the Quiz !</h2>
+        <label for="quizzid">Enter the unique Quiz code to enter the quiz !
+        </label> <br>
+        <form action="/joinQuiz" method="post">
+          <input type="text" name="quizId" id="quizzid" placeholder="Enter the unique Quiz code"><br>
+          <button type="submit">Join</button>
+        </form>
+      </div>
+    </section>
     <section>
       <div class="full_width">
         <h2>Unleash the Power of PDFs in Quiz Building !</h2>

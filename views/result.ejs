@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuizifyPDF | Introduction</title>
+    <link rel="shortcut icon" href="/asset/img/logo2.png" type="image/x-icon">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/result_style.css">
+</head>
+
+<body>
+    <nav>
+        <img src="/asset/img/logo2.png" alt="logo" class="logo" height="500" width="500">
+        <ul class="navlist">
+            <li><a href="index.html">Introduction</a></li>
+            <li><a href="form.html">Make a Quiz</a></li>
+            <li class="nav_contact"><a href="#contact_container">Join us</a></li>
+        </ul>
+    </nav>
+    <div class="container" id="container">
+        <section>
+            <div>
+                <h2>OOHOO!</h2>
+                <p>You have completed the quiz</p>
+            </div>
+            <div class="score_container" data-score="10">
+                <h4>Your Score</h4>
+                <h1><span id="score" class="score good"><%= score %></span>/10</h1>
+            </div>
+        </section>
+    </div>
+    <script src="result.js"></script>
+</body>
+
+</html>

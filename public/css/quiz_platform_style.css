@@ -4,9 +4,23 @@ nav>div {
     font-size: larger;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
-
+a{
+    text-decoration: none;
+    color: black;
+}
+:root {
+    --answered-color: rgb(132, 213, 162);
+    --unanswered-color: rgb(197, 194, 194);
+    --active-color: rgb(97, 153, 222);
+    --container_color: rgb(229, 249, 255);
+    --submit_color: rgb(222, 105, 97);
+    --submit_hover_color: rgb(235, 50, 37);
+    --button_color: rgb(132, 198, 213);
+    --button_hover_color: rgb(97, 153, 222, .8);
+    --sections_color: rgb(255, 255, 255);
+}
 .container {
-    background-color: rgb(229, 249, 255);
+    background-color: var(--container_color);
     max-height: calc(92dvh - 2em);
     padding: 0;
     margin: 1em 2em;
@@ -20,7 +34,7 @@ nav>div {
 .container>div {
     border: solid 2px black;
     padding: 1em;
-    background-color: rgb(255, 255, 255);
+    background-color: var(--sections_color);
     border-radius: 4px;
     box-shadow: 0 0 5px 2px rgb(125, 146, 155);
     margin: 1em;
@@ -47,18 +61,19 @@ nav>div {
     height: fit-content;
     justify-content: baseline;
     gap: .5em;
+    color: white;
 }
-.question_list>div[data="answered"] {
-    background-color: rgb(132, 213, 162);
+.question_list>a>div[data="answered"] {
+    background-color: var(--answered-color);
 }
-.question_list>div[data="unanswered"] {
-    background-color: rgb(197, 194, 194);
+.question_list>a>div[data="unanswered"] {
+    background-color: var(--unanswered-color);
 }
-.question_list>div[data="active"] {
-    background-color: rgb(97, 153, 222);
+.question_list>a>div[data="active"] {
+    background-color: var(--active-color);
 }
 
-.question_list>div:not(.heading) {
+.question_list>a>div:not(.heading) {
     height: 4em;
     width: 4em;
     border-radius: 5px;
@@ -85,7 +100,7 @@ nav>div {
 .question_list_container>.question_list_details>div>.details_color{
     height: 2em;
     width: 2em;
-    background-color: antiquewhite;
+    /* background-color: var(); */
 }
 .heading{
     font-size: 1.2em;
@@ -93,7 +108,7 @@ nav>div {
     flex :0 1 100%;
     text-align: center;
     font-weight: bold;
-    background-color: white;
+    background-color: var(--sections_color);
 }
 .questions{
     display: flex;
@@ -116,39 +131,61 @@ nav>div {
     flex-wrap: wrap;
     justify-content: space-evenly;
 }
+.answered_color {
+    background-color: var(--answered-color);
+}
+
+.unanswered_color {
+    background-color: var(--unanswered-color);
+}
+
+.active_color {
+    background-color: var(--active-color);
+}
 button, .next{
     width: 10em;
     height: 3em;
     border-radius: 5px;
     border: none;
-    background-color: rgb(132, 198, 213);
+    background-color: var(--button_color);
     font-size: 1.2em;
     font-weight: bold;
     cursor: pointer;
 }
 button:hover, .next:hover{
-    background-color: rgb(97, 153, 222, .8);
+    background-color: var(--button_hover_color);
 }
 button,button[id="open_modal"]{
-    background-color: rgba(222, 105, 97, 1);
+    background-color: var(--submit_color);
 }
 button:hover,button[id="open_modal"]:hover{
-    background-color: rgb(235, 50, 37);
+    background-color: var(--submit_hover_color);
 }
-.modal{
+.modal {
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     padding: 1em 2em;
     text-align: center;
+    /* display: grid; */
 }
-.modal p{
+
+.modal p,
+.modal div {
     margin-bottom: 2em;
 }
-:modal::backdrop{
-    background-color: rgba(0, 0, 0, 0.5);
+
+.modal p,
+.modal div input {
+    padding: 1em 2em;
 }
-#quizId{
-    display: none;
+
+.modal button {
+    margin: 0 1em;
+
+}
+
+:modal::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
 }

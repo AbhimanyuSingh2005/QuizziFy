@@ -42,7 +42,8 @@ nav {
     justify-content: space-between;
     align-items: center;
     background: rgb(218, 255, 255);
-    /* backdrop-filter: blur(5px); */
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
     height: clamp(50px, 8vh, 80px);
     min-height: clamp(50px, 8vh, 150px);
     box-shadow: 0 0 10px 2px rgb(125, 146, 155);
@@ -135,26 +136,6 @@ section div:is(:not(.full_width)) {
     flex-wrap: wrap;
     gap: 1em;
     justify-content: center;
-}
-
-section div:is(:not(.full_width)) p {
-    line-height: 1.2em;
-    width: clamp(250px, 30%, 400px);
-    padding: 3%;
-    /* border: solid 2px black; */
-    border-radius: 4px;
-    box-shadow: 0 0 5px 2px rgb(125, 146, 155);
-    background-color: white;
-}
-
-div:is(:not(.full_width)) h2 {
-    flex: 1 0 100%;
-
-}
-
-div h2 {
-    margin-bottom: 1.5em;
-    font-size: xx-large;
 }
 
 /* div:is(:not(.full_width)) >p{

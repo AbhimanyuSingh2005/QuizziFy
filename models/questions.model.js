@@ -23,11 +23,18 @@ const quizSchema = new mongoose.Schema({
     ],
     leaderboard:[
         {
-            type:mongoose.Schema.Types.ObjectId,
-            ref:'Answer'
+            resultId:{ 
+                type: String,
+            },
+            name: {
+                type: String,
+            },
+            score: {    
+                type: Number,
+            }
+
         }
     ]
-
 });
 
 const Quiz = new mongoose.model("Quiz", quizSchema);

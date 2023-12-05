@@ -38,9 +38,52 @@ header h1 {
     max-width: 10ch;
     height: 3ch;
 }
+section {
+    margin: 1rem 0;
+}
 
 section div:is(.full_width) {
     background-color: rgb(228, 228, 228);
     padding: 8% 15%;
 }
 
+section div:is(:not(.full_width)) p {
+    line-height: 1.2em;
+    width: clamp(250px, 30%, 400px);
+    padding: 3%;
+    /* border: solid 2px black; */
+    border-radius: 4px;
+    box-shadow: 0 0 5px 2px rgb(125, 146, 155);
+    background-color: white;
+}
+
+div:is(:not(.full_width)) h2 {
+    flex: 1 0 100%;
+
+}
+
+div h2 {
+    margin-bottom: 1.5em;
+    font-size: xx-large;
+}
+input{
+    margin: 1em 0;
+    width: clamp(250px, 30%, 400px);
+    padding: 1em 2em;
+    border-radius: 4px;
+    border: solid 1px rgb(125, 146, 155);
+    margin-bottom: 1em;
+    border-radius: 10px;
+}
+button{
+
+    /* margin: 2rem 0 0 0; */
+    border-radius: 10px;
+    padding: 1em 2em;
+    /* background-color: rgb(0, 136, 255); */
+    background-color: rgb(197, 42, 42);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+}

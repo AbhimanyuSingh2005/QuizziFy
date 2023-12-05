@@ -1,0 +1,54 @@
+section {
+    height: calc(100% - 2em);
+    width: calc(100% - 2em);
+    margin: 1em;
+    box-shadow: 0px 0px 5px 2px rgb(125, 146, 155);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+section>div {
+    display: flex;
+    flex-direction: column;
+}
+
+.score_container {
+    position: relative;
+    height: auto;
+    width: auto;
+    box-shadow: 0px 0px 5px 2px rgb(125, 146, 155);
+    font-size: larger;
+    font-weight: bold;
+    color: rgb(0, 0, 0);
+    padding: 4em;
+    aspect-ratio: 1/1;
+    border-radius: 100%;
+    background-color: white;
+}
+
+.score_container::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 110%;
+    width: 110%;
+    border-radius: 100%;
+    background-color: var(--score-color);
+    z-index: -1;
+}
+
+.score_container:has(.bad) {
+    --score-color: rgb(176, 32, 32);
+}
+
+.score_container:has(.average) {
+    --score-color: rgb(176, 152, 32);
+}
+
+.score_container:has(.good) {
+    --score-color: rgb(68, 176, 32);
+}
