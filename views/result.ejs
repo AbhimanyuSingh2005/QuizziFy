@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QuizifyPDF | Result</title>
+    <title>Quizzify | Result</title>
     <link rel="shortcut icon" href="/asset/img/logo2.png" type="image/x-icon">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/result_style.css">
@@ -21,17 +21,74 @@
     </nav>
     <div class="container" id="container">
         <section>
-            <div>
+            <div class="score_container">
                 <h2>OOHOO!</h2>
                 <p>You have completed the quiz</p>
             </div>
-            <div class="score_container" data-score="10">
-                <h4>Your Score</h4>
-                <h1><span id="score" class="score good"><%= score %></span>/10</h1>
-            </div>
+            <span class="scorecard">
+                <div class="outer">
+                    <div class="inner">
+                        <h1><span id="score" class="score"><%= score %></span>/10</h1>
+                    </div>
+                </div>
+                <svg xmlns="http://www.w3.org/2000/svg" versions="1.1" width="160" height="160">
+                    <defs>
+                        <linearGradient id = "GradientColor">
+                            <stop offset="0%" stop-color="#DA22FF" />
+                            <stop offset="100%" stop-color="#9733EE" />
+                        </linearGradient>
+                    </defs>
+                    <circle cx="80" cy="80" r="70" stroke-linecap="round" />
+                </svg>
+            </span>
+            <span id="result"></span>
         </section>
+        <!-- <section>
+            <div class=" leaderboard_container">
+                <h2><u>LeaderBoard</u></h2>
+                <div class="leaderboard">
+                    <div class="heading">
+                        <div>Rank</div>
+                        <div>Name</div>
+                        <div>Score</div>
+                    </div>
+                    <div class="leaderboard_content">
+                        <div class="rank">1</div>
+                        <div class="name">nkfnek</div>
+                        <div class="score">20</div>
+                        <div class="rank">1</div>
+                        <div class="name">nkfnek</div>
+                        <div class="score">20</div>
+                        <div class="rank">1</div>
+                        <div class="name">nkfnek</div>
+                        <div class="score">20</div>
+                        <div class="rank">1</div>
+                        <div class="name">nkfnek</div>
+                        <div class="score">20</div>
+                        <div class="rank">1</div>
+                        <div class="name">nkfnek</div>
+                        <div class="score">20</div>
+                        <div class="rank">1</div>
+                        <div class="name">nkfnek</div>
+                        <div class="score">20</div>
+                        <div class="rank">1</div>
+                        <div class="name">nkfnek</div>
+                        <div class="score">20</div>
+                        <div class="rank">1</div>
+                        <div class="name">nkfnek</div>
+                        <div class="score">20</div>
+                        <div class="rank">1</div>
+                        <div class="name">nkfnek</div>
+                        <div class="score">20</div>
+                        <div class="rank">1</div>
+                        <div class="name">nkfnek</div>
+                        <div class="score">20</div>
+                    </div>
+                </div>
+            </div>
+        </section> -->
     </div>
-    <script src="result.js"></script>
+    <script src="/js/result.js"></script>
 </body>
 
 </html>
