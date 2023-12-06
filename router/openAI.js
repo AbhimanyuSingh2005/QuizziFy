@@ -25,6 +25,7 @@ async function chatGPT(content,dificultyLevel ) {
     const ques = await chatCompletion.choices[0].message.content;
     const json = JSON.parse(ques);
     return(json);
+    // return(quiz);
 };
 
 module.exports = chatGPT;   

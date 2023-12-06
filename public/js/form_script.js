@@ -1,4 +1,6 @@
 const dragarea = document.querySelector(".selection_area");
+// modal.close();
+const modal = document.querySelector(".modal");
 let pdf_length = [];
 dragarea.addEventListener("dragenter", (e) => {
     e.preventDefault();
@@ -114,3 +116,8 @@ document.getElementById("index_start").addEventListener("change", ()=>{
     }
 });
 document.getElementById("index_end").addEventListener("change", doo);
+document.getElementById("submit_button").addEventListener("click", (e) => {
+    // e.preventDefault();
+    document.querySelector(".loader").classList.add("loader_active");
+    modal.showModal();
+});
