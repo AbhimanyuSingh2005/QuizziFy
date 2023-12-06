@@ -60,6 +60,7 @@ router.post('/createQuiz', async (req, res) => {
     const newQuiz = new Quiz(quiz);
     try {
         await newQuiz.save();
+        answer =  [5,5,5,5,5,5,5,5,5,5]; 
         res.redirect(url.format({
             pathname: "/quizHome",
             query: {
