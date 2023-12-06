@@ -27,16 +27,16 @@
             <div class="question_list">
                 <% answer.forEach((ans,index)=>{ %>
                     <% if(index == no-1) { %>
-                        <a href="/">
+                        <a href="">
                         <div data="active" class="question_list_item"><%= index+1 %></div>
                         </a>
-                    <% } else if(ans) { %>
-                        <a href="/quiz?id=<%= id %>&no=<%= index+1 %>&r=<%= resultId %>">
-                            <div data="answered" class="question_list_item"><%= index+1 %></div>
+                    <% } else if(ans==4) { %>
+                        <a href="/quiz?id=<%= id %>&no=<%= index+1 %>">
+                            <div data="unanswered" class="question_list_item"><%= index+1 %></div>
                         </a>
                     <% } else{ %>
-                        <a href="/quiz?id=<%= id %>&no=<% index+1 %>&r=<%= resultId %>">
-                            <div data="unanswered" class="question_list_item"><%= index+1 %></div>
+                        <a href="/quiz?id=<%= id %>&no=<%= index+1 %>">
+                            <div data="answered" class="question_list_item"><%= index+1 %></div>
                         </a>
                     <% } %>
                 <% }) %>
@@ -61,7 +61,7 @@
             </div>
         </div>
         <div>
-            <form class="questions" method="post" action="/ques?id=<%= id %>&no=<% index+1 %>&r=<%= resultId %>">
+            <form class="questions" method="post" action="/ques?id=<%= id %>&no=<%= no %>">
                 <div class="question_container">
                     <div class="question">
                         <div class="heading">Question <%= no  %> </div>

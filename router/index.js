@@ -9,7 +9,7 @@ const Quiz = require('../models/questions.model');  //importing the model
 const { questions } = require('../developmentAsset/quiz');
 // router.use(bodyParser.urlencoded({ extended: true }));
 
-const answer = [4, 4, 4, 4, 4, 4, 4, 4, 4, 4];   //array to store score
+let answer = [];   //array to store score
 
 router.get('/', (req, res) => {
     res.render('index');
@@ -23,11 +23,14 @@ router.get('/quizHome', (req, res) => {
 router.get('/quiz', async (req, res) => {
     // console.log(req.query.id);
     // console.log(req.query.no);
+    if(req.query.no==1){
+        answer=[4, 4, 4, 4, 4, 4, 4, 4, 4, 4];
+    }
     if(req.query.no>0&&req.query.no<11){
         const quiz = await Quiz.findOne({ quizId: req.query.id });
         const ques = quiz.questions[req.query.no - 1];
-        const resultId = req.query.r;
-        const answer = quiz.leaderboard.find((result) => result.resultId == resultId).answer;   //finding answer from leaderboard
+        // const resultId = req.query.r;
+        // const answer = quiz.leaderboard.find((result) => result.resultId == resultId).answer;   //finding answer from leaderboard
         res.render('quiz_platform',
             {
                 question: ques.question, 
@@ -35,7 +38,7 @@ router.get('/quiz', async (req, res) => {
                 no: parseFloat(req.query.no), 
                 id: req.query.id, 
                 answer: answer,
-                resultId:resultId
+                // resultId:resultId
             }
         );
     }else{
@@ -73,11 +76,11 @@ router.post('/ques', async (req, res) => {
     // console.log(req.body.quizId);
     const quiz = await Quiz.findOne({ quizId: req.query.id });
     const questions = quiz.questions;
-    const resultId = req.query.r;
-    const answer = quiz.leaderboard.find((result) => result.resultId == resultId).answer;   //finding answer from leaderboard
+    // const resultId = req.query.r;
+    // const answer = quiz.leaderboard.find((result) => result.resultId == resultId).answer;   //finding answer from leaderboard
     if (req.body.answer) {
         answer[req.query.no - 1] = req.body.answer;
-        const response = await Quiz.findOneAndUpdate({ quizId: req.body.quizId }, {leaderboard.find((result) => result.resultId == resultId).answer: answer });
+        // const response = await Quiz.findOneAndUpdate({ quizId: req.body.quizId }, {leaderboard.find((result) => result.resultId == resultId).answer: answer });
     }
     if (req.query.no == 10) {
         
@@ -87,23 +90,29 @@ router.post('/ques', async (req, res) => {
                 score++;
             }
         });
-        // const response = await 
+        const resultId = uuidv4();
+        const name = req.body.name;
+        try{
+            const response = await Quiz.updateOne({ quizId: req.query.id }, { $push: { leaderboard: {resultId:resultId,name:name,score:score} } });
+        }catch(err){
+            console.log(err);
+        }
         res.redirect(url.format({
             pathname: "/score",
             query: {
-                "id": req.body.quizId,
+                "id": req.query.id,
                 "resultId": resultId
             }
         })
         );
     }
     else {
-        console.log(answer);
+        // console.log(answer);1111111111111
         res.redirect(url.format({
             pathname: "/quiz",
             query: {
-                "id": req.body.quizId,
-                "no": parseFloat(req.body.quesNo) + 1,
+                "id": req.query.id,
+                "no": parseFloat(req.query.no) + 1,
             }
         })
         );
@@ -111,13 +120,13 @@ router.post('/ques', async (req, res) => {
 });
 router.post('/joinQuiz',async(req,res)=>{
     const quizId = req.body.quizId;
-    const resultId = uuidv4();
-    const response = await Quiz.findOneAndUpdate({ quizId: req.body.quizId }, { $push: { leaderboard: {resultId:resultId} } });    
+    // const resultId = uuidv4();
+    // const response = await Quiz.findOneAndUpdate({ quizId: req.body.quizId }, { $push: { leaderboard: {resultId:resultId} } });    
     res.redirect(url.format({
         pathname: "/quiz",
         query: {
             "id": quizId,
-            "r": resultId,
+            // "r": resultId,
             "no": 1,
         }
     })
