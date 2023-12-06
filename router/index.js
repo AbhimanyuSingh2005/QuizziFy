@@ -9,7 +9,7 @@ const Quiz = require('../models/questions.model');  //importing the model
 const { questions } = require('../developmentAsset/quiz');
 // router.use(bodyParser.urlencoded({ extended: true }));
 
-const answer = [5,5,5,5,5,5,5,5,5,5];   //array to store score
+const answer = [];  //array to store score
 
 router.get('/', (req, res) => {
     res.render('index');
@@ -36,6 +36,7 @@ router.post('/createQuiz',async (req,res)=>{
     const newQuiz = new Quiz(quiz);
     try{
         await newQuiz.save();
+        answer =  [5,5,5,5,5,5,5,5,5,5]; 
         res.redirect(url.format({
             pathname:"/quizHome",
             query: {
