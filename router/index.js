@@ -26,14 +26,18 @@ router.get('/quiz', async (req, res) => {
     if(req.query.no>0&&req.query.no<11){
         const quiz = await Quiz.findOne({ quizId: req.query.id });
         const ques = quiz.questions[req.query.no - 1];
+        const resultId = req.query.r;
+        const answer = quiz.leaderboard.find((result) => result.resultId == resultId).answer;   //finding answer from leaderboard
         res.render('quiz_platform',
             {
                 question: ques.question, 
                 options: ques.options, 
                 no: parseFloat(req.query.no), 
                 id: req.query.id, 
-                answer: answer
-            });
+                answer: answer,
+                resultId:resultId
+            }
+        );
     }else{
         res.json({message:"Invalid question number"}).status(404);
     }
@@ -67,19 +71,23 @@ router.post('/createQuiz', async (req, res) => {
 );
 router.post('/ques', async (req, res) => {
     // console.log(req.body.quizId);
-
+    const quiz = await Quiz.findOne({ quizId: req.query.id });
+    const questions = quiz.questions;
+    const resultId = req.query.r;
+    const answer = quiz.leaderboard.find((result) => result.resultId == resultId).answer;   //finding answer from leaderboard
     if (req.body.answer) {
-        answer[req.body.quesNo - 1] = req.body.answer;
+        answer[req.query.no - 1] = req.body.answer;
+        const response = await Quiz.findOneAndUpdate({ quizId: req.body.quizId }, {leaderboard.find((result) => result.resultId == resultId).answer: answer });
     }
-    if (req.body.quesNo == 10) {
+    if (req.query.no == 10) {
+        
         let score = 0;
         questions.forEach((ques, index) => {
             if (ques.answer == answer[index]) {
                 score++;
             }
         });
-        const resultId = uuidv4();
-        const response = await Quiz.findOneAndUpdate({ quizId: req.body.quizId }, { $push: { leaderboard: {resultId:resultId, name: req.body.name, score: score } } }, { new: true });
+        // const response = await 
         res.redirect(url.format({
             pathname: "/score",
             query: {
@@ -101,12 +109,15 @@ router.post('/ques', async (req, res) => {
         );
     }
 });
-router.post('/joinQuiz',(req,res)=>{
+router.post('/joinQuiz',async(req,res)=>{
     const quizId = req.body.quizId;
+    const resultId = uuidv4();
+    const response = await Quiz.findOneAndUpdate({ quizId: req.body.quizId }, { $push: { leaderboard: {resultId:resultId} } });    
     res.redirect(url.format({
         pathname: "/quiz",
         query: {
             "id": quizId,
+            "r": resultId,
             "no": 1,
         }
     })

@@ -30,13 +30,13 @@
                         <a href="/">
                         <div data="active" class="question_list_item"><%= index+1 %></div>
                         </a>
-                    <% } else if(ans == 4) { %>
-                        <a href="/quiz?id=<%= id %>&no=<%= index+1 %>">
-                            <div data="unanswered" class="question_list_item"><%= index+1 %></div>
+                    <% } else if(ans) { %>
+                        <a href="/quiz?id=<%= id %>&no=<%= index+1 %>&r=<%= resultId %>">
+                            <div data="answered" class="question_list_item"><%= index+1 %></div>
                         </a>
                     <% } else{ %>
-                        <a href="/quiz?id=<%= id %>&no=<% index+1 %>">
-                            <div data="answered" class="question_list_item"><%= index+1 %></div>
+                        <a href="/quiz?id=<%= id %>&no=<% index+1 %>&r=<%= resultId %>">
+                            <div data="unanswered" class="question_list_item"><%= index+1 %></div>
                         </a>
                     <% } %>
                 <% }) %>
@@ -61,7 +61,7 @@
             </div>
         </div>
         <div>
-            <form class="questions" method="post" action="/ques">
+            <form class="questions" method="post" action="/ques?id=<%= id %>&no=<% index+1 %>&r=<%= resultId %>">
                 <div class="question_container">
                     <div class="question">
                         <div class="heading">Question <%= no  %> </div>
@@ -87,9 +87,9 @@
                     </div>
                 </div>
                 <div class="button_container">
-                    <input type="hidden" name="quizId" value="<%= id %>" id="quizId">
+                    <!-- <input type="hidden" name="quizId" value="<%= id %>" id="quizId"> -->
                     <% if(no!=10){ %>
-                        <button name="quesNo" value="<%= no %>" class="button next" type="submit" id="prev_button">Next</button>
+                        <button class="button next" type="submit" id="prev_button">Next</button>
                     <% } %>
                     <button type="button" id="open_modal">Submit</button>
                 </div>
@@ -101,7 +101,7 @@
                         <input type="text" name="name" placeholder="Your Name">
                     </div>
                     <button type="button" id="close_modal" class="next">Cancel</button>
-                    <button name="quesNo" value="10" type="submit" id="question_submit">Submit</button>
+                    <button type="submit" id="question_submit">Submit</button>
                 </dialog>
             </form>
                 
