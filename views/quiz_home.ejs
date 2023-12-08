@@ -32,18 +32,18 @@
       </p>
     </header>
     <section class="button_container">
-      <a href="/quiz?id=<%=quizId%>&no=1">
-        <button class="join_button">
+      <form action="/joinQuiz" method="post">
+        <button name="quizId" value="<%= id %>"  class="join_button">
           <p>Join the Quiz</p>
         </button>
         <!-- <button class="edit_button">
           <p>Edit the Quiz</p>
         </button> -->
-      </a>
+      </form>
     </section>
     <section>
       <div class="master full_width">
-        Share this unique quiz-code with your audience, students, or colleagues. <div class="code"><%= quizId %> </div>
+        Share this unique quiz-code with your audience, students, or colleagues. <div class="code"><%= id %> </div>
         <br>
       </div>
     </section>

@@ -18,14 +18,11 @@ router.get('/form', (req, res) => {
     res.render('form');
 });
 router.get('/quizHome', (req, res) => {
-    res.render('quiz_home', { quizId: req.query.id });
+    res.render('quiz_home', { id: req.query.id });
 });
 router.get('/quiz', async (req, res) => {
     // console.log(req.query.id);
     // console.log(req.query.no);
-    if(req.query.no==1){
-        answer=[4, 4, 4, 4, 4, 4, 4, 4, 4, 4];
-    }
     if(req.query.no>0&&req.query.no<11){
         const quiz = await Quiz.findOne({ quizId: req.query.id });
         const ques = quiz.questions[req.query.no - 1];
@@ -60,7 +57,7 @@ router.post('/createQuiz', async (req, res) => {
     const newQuiz = new Quiz(quiz);
     try {
         await newQuiz.save();
-        answer =  [5,5,5,5,5,5,5,5,5,5]; 
+        // answer =  [5,5,5,5,5,5,5,5,5,5]; 
         res.redirect(url.format({
             pathname: "/quizHome",
             query: {
@@ -121,6 +118,7 @@ router.post('/ques', async (req, res) => {
 });
 router.post('/joinQuiz',async(req,res)=>{
     const quizId = req.body.quizId;
+    answer = [4,4,4,4,4,4,4,4,4,4];
     // const resultId = uuidv4();
     // const response = await Quiz.findOneAndUpdate({ quizId: req.body.quizId }, { $push: { leaderboard: {resultId:resultId} } });    
     res.redirect(url.format({
