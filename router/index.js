@@ -1,6 +1,6 @@
 const express = require('express');    //importing express
 const mongoose = require('mongoose');   //importing mongoose
-const chatGPT = require('./openAI');   //importing openAI.js
+const run = require('./gemini');   //importing openAI.js
 const router = express.Router();    //creating router
 const { v4: uuidv4 } = require('uuid');  //importing uuid
 const url = require('url');   //importing url
@@ -51,7 +51,7 @@ router.get('/score', async (req, res) => {
 router.post('/createQuiz', async (req, res) => {
     const content = req.body.quizContent;
     const difficulty = req.body.difficulty;
-    const quiz = await chatGPT(content, difficulty);
+    const quiz = await run(content, difficulty);
     const quizId = uuidv4();
     quiz.quizId = quizId;
     const newQuiz = new Quiz(quiz);
