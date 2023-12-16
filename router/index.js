@@ -4,6 +4,7 @@ const run = require('./gemini');   //importing openAI.js
 const router = express.Router();    //creating router
 const { v4: uuidv4 } = require('uuid');  //importing uuid
 const url = require('url');   //importing url
+const multer = require('multer');   //importing multer
 
 const Quiz = require('../models/questions.model');  //importing the model
 const { questions } = require('../developmentAsset/quiz');
@@ -131,10 +132,23 @@ router.post('/joinQuiz',async(req,res)=>{
     })
     );
 });
-// router.post('/getQuiz',async (req,res)=>{
-//     const quizId = req.body.quizId;
-//     const quiz = await Quiz.findOne({quizId:quizId});
-// }); //get quiz from db
+///////////////////////////////////////////////// PDF to text /////////////////////////////////////////////////
+// const upload = multer({ dest: './uploads/' });
+// router.get('/convert', (req, res) => {
+//     res.render('newopai');
+// });
+// const convertToText = require('./convertapi');
+// router.post('/convert', upload.single('file'),(req, res) => {
+//     if (!req.files || !req.files.file) {
+//         return res.status(400).send('No file uploaded');
+//     }
+//     const file = req.files.file;
+//     const fileName = file.name;
+//     console.log(file);
+//     console.log(fileName);
+//     res.send('File Uploaded');
+// });
+
 
 module.exports = router;    //exporting router
 

@@ -55,6 +55,4 @@ const {
     return(JSONResponse);
   }
   
-  run();
-
 module.exports = run;
