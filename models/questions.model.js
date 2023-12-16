@@ -20,25 +20,6 @@ const quizSchema = new mongoose.Schema({
                 required:true
             }
         }
-    ],
-    leaderboard:[
-        {
-            resultId:{ 
-                type: String,
-            },
-            name: {
-                type: String,
-            },
-            score: {    
-                type: Number,
-            },
-            // answer: [
-            //     {
-            //         type: Number,
-            //     }
-            // ]
-
-        }
     ]
 });
 

@@ -7,20 +7,27 @@ const url = require('url');   //importing url
 const multer = require('multer');   //importing multer
 
 const Quiz = require('../models/questions.model');  //importing the model
-const { questions } = require('../developmentAsset/quiz');
-// router.use(bodyParser.urlencoded({ extended: true }));
-
+const Result = require('../models/results.model');  //importing the model
 let answer = [];   //array to store score
+
+
+//////////////////////////////////////////////// Home Route /////////////////////////////////////////////////
 
 router.get('/', (req, res) => {
     res.render('index');
 });
-router.get('/form', (req, res) => {
-    res.render('form');
+
+//////////////////////////////////////////////// Get Route to Create quiz from Pdf /////////////////////////////////////////////////
+router.get('/pdfToQuiz', (req, res) => {
+    res.render('pdfToQuiz');
 });
+
+//////////////////////////////////////////////// Get Route to Quiz Home Page after creation of Quiz /////////////////////////////////////////////////
 router.get('/quizHome', (req, res) => {
     res.render('quiz_home', { id: req.query.id });
 });
+
+//////////////////////////////////////////////// Get Route to Quiz Platform /////////////////////////////////////////////////
 router.get('/quiz', async (req, res) => {
     // console.log(req.query.id);
     // console.log(req.query.no);
@@ -43,12 +50,20 @@ router.get('/quiz', async (req, res) => {
         res.json({message:"Invalid question number"}).status(404);
     }
 });
+
+//////////////////////////////////////////////// Get Route to Score /////////////////////////////////////////////////
 router.get('/score', async (req, res) => { 
-    const result = await Quiz.findOne({ quizId: req.query.id });
-    const resultId = req.query.resultId;
-    const score = result.leaderboard.find((result) => result.resultId == resultId).score;   //finding score from leaderboard
-    res.render('result', { score: score });
+    const result = await Result.findOne({ resultID: req.query.r });
+    // console.log(result);
+    const score = result.score;
+    const results =  await Result.find({ quizId: req.query.id });
+    results.sort((a,b)=>b.score-a.score);
+    const leaderboard = results.slice(0,10);
+    // console.log(leaderboard);
+    res.render('result', { score: score ,leaderboard:leaderboard});
 });
+
+//////////////////////////////////////////////// Post Route to create Quiz form Pdf/////////////////////////////////////////////////
 router.post('/createQuiz', async (req, res) => {
     const content = req.body.quizContent;
     const difficulty = req.body.difficulty;
@@ -71,12 +86,13 @@ router.post('/createQuiz', async (req, res) => {
     }
 }
 );
+
+
+//////////////////////////////////////////////// Post Route to Answer And Submit quiz /////////////////////////////////////////////////
 router.post('/ques', async (req, res) => {
     // console.log(req.body.quizId);
     const quiz = await Quiz.findOne({ quizId: req.query.id });
     const questions = quiz.questions;
-    // const resultId = req.query.r;
-    // const answer = quiz.leaderboard.find((result) => result.resultId == resultId).answer;   //finding answer from leaderboard
     if (req.body.answer) {
         answer[req.query.no - 1] = req.body.answer;
         // const response = await Quiz.findOneAndUpdate({ quizId: req.body.quizId }, {leaderboard.find((result) => result.resultId == resultId).answer: answer });
@@ -90,17 +106,27 @@ router.post('/ques', async (req, res) => {
             }
         });
         const resultId = uuidv4();
-        const name = req.body.name;
+        // const name = req.body.name;
+        const result = new Result({
+            quizId: req.query.id,
+            resultID: resultId,
+            name: req.body.name,
+            score: score,
+            answer: answer
+        });
+        // console.log(result);
         try{
-            const response = await Quiz.updateOne({ quizId: req.query.id }, { $push: { leaderboard: {resultId:resultId,name:name,score:score} } });
+            const response = await result.save();
+            // console.log(response);
         }catch(err){
+            
             console.log(err);
         }
         res.redirect(url.format({
             pathname: "/score",
             query: {
                 "id": req.query.id,
-                "resultId": resultId
+                "r": resultId
             }
         })
         );
@@ -117,21 +143,25 @@ router.post('/ques', async (req, res) => {
         );
     }
 });
+
+
+//////////////////////////////////////////////// Post Route to Join quiz /////////////////////////////////////////////////
+
 router.post('/joinQuiz',async(req,res)=>{
     const quizId = req.body.quizId;
     answer = [4,4,4,4,4,4,4,4,4,4];
-    // const resultId = uuidv4();
-    // const response = await Quiz.findOneAndUpdate({ quizId: req.body.quizId }, { $push: { leaderboard: {resultId:resultId} } });    
     res.redirect(url.format({
         pathname: "/quiz",
         query: {
             "id": quizId,
-            // "r": resultId,
             "no": 1,
         }
     })
     );
 });
+
+
+
 ///////////////////////////////////////////////// PDF to text /////////////////////////////////////////////////
 // const upload = multer({ dest: './uploads/' });
 // router.get('/convert', (req, res) => {
