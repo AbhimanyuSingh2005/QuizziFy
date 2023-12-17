@@ -8,14 +8,40 @@
     <link rel="shortcut icon" href="/asset/img/logo2.png" type="image/x-icon">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/quiz_platform_style.css">
+    <link rel="stylesheet" href="/css/review.css">
 
 <body>
-    <nav>
-        <img src="/asset/img/logo2.png" alt="logo" class="logo" height="500" width="500">
-        <div>
-            Quiz Title
-        </div>
-    </nav>
+        <nav>
+            <img src="/asset/img/logo2.png" alt="logo" class="logo" height="500" width="500">
+            <menu class="navlist">
+              <li><a href="/">Introduction</a></li>
+              <li>
+                <div class="dropdown">Make a Quiz</div>
+              </li>
+              <div class="dropdown_content">
+                <div>
+                  <a href="/pdfToQuiz">
+                    <i class="fa-solid fa-file-pdf"></i>
+                    <p>Pdf To Quiz</p>
+                  </a>
+                </div>
+                <div>
+                  <a href="/promptToQuiz">
+                    <i class="fa-solid fa-file-image"></i>
+                    <p>Prompt To Quiz</p>
+                  </a>
+                </div>
+                <div>
+                  <a href="" class="under_process">
+                    <i class="fa-solid fa-file-video"></i>
+                    <p>Video To Quiz</p>
+                  </a>
+                </div>
+              </div>
+              <li class="active"><a href="">Your Quiz</a></li>
+            </menu>
+          </nav>
+          <header>
     <div class="container" id="container">
         <div class="question_list_container">
             <div class="heading">Question List</div>
@@ -23,40 +49,36 @@
                 <% answer.forEach((ans,index)=>{ %>
                     <% if(index == no-1) { %>
                         <a href="">
-                        <div data="active" class="question_list_item"><%= index+1 %></div>
+                        <div data="correct" class="question_list_item"><%= index+1 %></div>
                         </a>
                     <% } else if(ans==4) { %>
                         <a href="/quiz?id=<%= id %>&no=<%= index+1 %>">
-                            <div data="unanswered" class="question_list_item"><%= index+1 %></div>
+                            <div data="wrong" class="question_list_item"><%= index+1 %></div>
                         </a>
                     <% } else{ %>
                         <a href="/quiz?id=<%= id %>&no=<%= index+1 %>">
-                            <div data="answered" class="question_list_item"><%= index+1 %></div>
+                            <div data="unanswered" class="question_list_item"><%= index+1 %></div>
                         </a>
                     <% } %>
                 <% }) %>
-                <!-- <div data="answered">Q1</div>
-                <div data="unanswered">Q2</div>
-                <div data="active">Q3</div>
-                <div data="unanswered">Q4</div> -->
             </div>
             <div class="question_list_details">
                 <div class="answered">
                     <div class="answered_color details_color"></div>
-                    <div class="details_text"> - Answered</div>
+                    <div class="details_text"> - Correct</div>
                 </div>
                 <div class="unanswered">
-                    <div class="unanswered_color details_color"></div>
-                    <div class="details_text"> - Unanswered</div>
+                    <div class="wrong_color details_color"></div>
+                    <div class="details_text"> - Wrong</div>
                 </div>
                 <div class="active">
-                    <div class="active_color details_color"></div>
-                    <div class="details_text"> - Active</div>
+                    <div class="unanswered_color details_color"></div>
+                    <div class="details_text"> - Not Answered</div>
                 </div>
             </div>
         </div>
         <div>
-            <form class="questions" method="post" action="/ques?id=<%= id %>&no=<%= no %>">
+            <form class="questions" method="post" action="result.html">
                 <div class="question_container">
                     <div class="question">
                         <div class="heading">Question <%= no  %> </div>
@@ -64,11 +86,11 @@
                     </div>
                     <div class="option_container">
                         <div class="option">
-                            <input type="radio" name="answer" id="option_1" value="0">
+                            <input type="radio" name="answer" id="option_1" value="0" data-set="correct">
                             <label for="option_1" class="option_text"> <%= options[0] %></label>
                         </div>
                         <div class="option">
-                            <input type="radio" name="answer" id="option_2" value="1">
+                            <input type="radio" name="answer" id="option_2" value="1"  checked>
                             <label for="option_2" class="option_text"> <%= options[1] %></label>
                         </div>
                         <div class="option">
@@ -82,28 +104,15 @@
                     </div>
                 </div>
                 <div class="button_container">
-                    <!-- <input type="hidden" name="quizId" value="<%= id %>" id="quizId"> -->
                     <% if(no!=10){ %>
-                        <button class="button next" type="submit" id="prev_button">Next</button>
+                        <button class="button next" type="button" id="prev_button">Next</button>
                     <% } %>
-                    <button type="button" id="open_modal">Submit</button>
+                    <button type="button">Go Back</button>
                 </div>
-                <dialog class="modal">
-                    <p>Do you want to Submit the Quiz <br>
-                    <sub>You wont be able to edit your response after submition</sub></p>
-                    <div>
-                        <label for="question_id">Your Name : </label>
-                        <input type="text" name="name" placeholder="Your Name">
-                    </div>
-                    <button type="button" id="close_modal" class="next">Cancel</button>
-                    <button type="submit" id="question_submit">Submit</button>
-                </dialog>
             </form>
                 
         </div>
-        <!-- <div></div> -->
     </div>
-    <script src="js/quiz_platform.js"></script>
 </body>
 
 </html>

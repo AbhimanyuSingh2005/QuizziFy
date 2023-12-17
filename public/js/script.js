@@ -1,14 +1,33 @@
 const nav = document.querySelector(".active");
 const contact = document.querySelector(".nav_contact");
 const heading = document.getElementById("heading");
-document.getElementById("container").addEventListener("scroll", () => {
-    let height = document.getElementById("contact_container").getBoundingClientRect().top - document.getElementById("container").getBoundingClientRect().height;
-    if (height < 0) {
-        nav.className = "";
-        contact.className = "active";
-    }
-    else {
-        contact.className = "contact";
-        nav.className = "active";
-    }
-})
+const nav_observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+           nav.className = "";
+           contact.className = "active";
+        } else {
+           nav.className = "active";
+           contact.className = "";
+        }
+    });
+    });
+document.querySelectorAll(".contact").forEach(section => {
+    nav_observer.observe(section);
+});
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+           entry.target.classList.add("show");
+        } 
+        else {
+            entry.target.classList.remove("show");
+        }
+    });
+    });
+const aos = document.querySelectorAll(".aos");
+console.log(aos);
+aos.forEach((element) => {
+    observer.observe(element);
+});

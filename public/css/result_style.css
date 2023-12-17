@@ -1,8 +1,8 @@
 section {
     width: calc(100% - 2em);
-    height: calc(100% - 2em);
+    /* height: calc(100% - 2em); */
     padding: 2em;
-    margin: 1em;
+    margin: 1em auto;
     box-shadow: 0px 0px 5px 2px rgb(125, 146, 155);
     display: flex;
     flex-direction: column;
@@ -85,12 +85,10 @@ svg {
 section div.leaderboard_container {
     width: calc(100% - 2em);
     display: grid;
-    /* overflow: hidden; */
 }
 
 .leaderboard {
     box-shadow: 0px 0px 5px 2px rgb(125, 146, 155);
-    /* width: max-; */
     margin: auto;
     padding: 1em 0;
 }
@@ -106,10 +104,9 @@ section .leaderboard>div {
 }
 
 section .leaderboard .heading {
-    box-shadow: 0px 0px 5px 2px rgb(125, 146, 155);
     font-weight: bold;
     font-size: larger;
-    text-decoration: underline;
+    border-bottom: 2px solid rgb(125, 146, 155);
 }
 
 .leaderboard_container h2 {
@@ -124,4 +121,11 @@ section .leaderboard .heading {
 
 section .leaderboard div {
     text-align: center;
+}
+.review_button{
+    padding: 1em 2em;
+    border: none;
+    background-color: rgb(0, 136, 255);
+    color: white;
+    font-size: large;
 }

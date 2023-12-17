@@ -8,8 +8,19 @@ a{
     text-decoration: none;
     color: black;
 }
+.container::-webkit-scrollbar {
+    width: 14px;
+}
+
+.container::-webkit-scrollbar-thumb {
+    border: 4px solid rgba(194, 32, 32, 0);
+    background-clip: padding-box;
+    border-radius: 9999px;
+    background-color: #AAAAAA;
+}
 :root {
     --answered-color: rgb(132, 213, 162);
+    --correct_color: rgb(132, 213, 162);
     --unanswered-color: rgb(197, 194, 194);
     --active-color: rgb(97, 153, 222);
     --container_color: rgb(229, 249, 255);
@@ -18,6 +29,7 @@ a{
     --button_color: rgb(132, 198, 213);
     --button_hover_color: rgb(97, 153, 222, .8);
     --sections_color: rgb(255, 255, 255);
+    --wrong_color: rgb(255, 85, 85);
 }
 .container {
     background-color: var(--container_color);
@@ -121,8 +133,9 @@ a{
     margin: 1em auto;
 }
 .questions .option{
-    margin: .5em auto;
+    margin: .5em;
     text-wrap: balance;
+    cursor: pointer;
 }
 .button_container{
     margin-top: 2em;
@@ -188,4 +201,18 @@ button:hover,button[id="open_modal"]:hover{
 
 :modal::backdrop {
     background-color: rgba(0, 0, 0, 0.5);
+}
+.option label{
+    width: 100;
+    cursor: pointer;
+}
+.option_container .option{
+    padding: 1em 2em;
+    /* background-color: #e0dfdf; */
+}
+.option_container .option:hover{
+    background-color: #c4c4c4;
+}
+.option_container .option:has(input:checked){
+    background-color: #9a9a9a;
 }
