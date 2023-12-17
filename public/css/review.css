@@ -1,0 +1,21 @@
+.option{
+    pointer-events: none;
+}
+.questions .option:has(input:checked){
+    background-color: var(--wrong_color);
+}
+.questions .option:has(input[data-set="correct"]){
+    background-color: var(--correct_color);
+}
+.wrong_color{
+    background-color: var(--wrong_color);
+}
+.question_list>a>div[data="correct"] {
+    background-color: var(--correct_color);
+}
+.question_list>a>div[data="wrong"] {
+    background-color: var(--wrong_color);
+}
+.question_list>a>div[data="unanswered"] {
+    background-color: var(--unanswered-color);
+}

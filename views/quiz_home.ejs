@@ -4,8 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/quiz_home_style.css">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/quiz_home_style.css">
   <link rel="shortcut icon" href="/asset/img/logo2.png" type="image/x-icon">
   <title>Quizzify | Quiz Generated</title>
 </head>
@@ -13,54 +13,68 @@
 <body>
   <nav>
     <img src="/asset/img/logo2.png" alt="logo" class="logo" height="500" width="500">
-    <ul class="navlist">
+    <menu class="navlist">
       <li><a href="/">Introduction</a></li>
+      <li>
+        <div class="dropdown">Make a Quiz</div>
+      </li>
+      <div class="dropdown_content">
+        <div>
+          <a href="/pdfToQuiz">
+            <i class="fa-solid fa-file-pdf"></i>
+            <p>Pdf To Quiz</p>
+          </a>
+        </div>
+        <div>
+          <a href="/prompt_to_quiz">
+            <i class="fa-solid fa-file-image"></i>
+            <p>Prompt To Quiz</p>
+          </a>
+        </div>
+        <div>
+          <a href="" class="under_process">
+            <i class="fa-solid fa-file-video"></i>
+            <p>Video To Quiz</p>
+          </a>
+        </div>
+      </div>
       <li class="active"><a href="">Your Quiz</a></li>
-      <li><a href="/pdfToQuiz">Make a Quiz</a></li>
-      <!-- <li class="nav_contact"><a href="#contact_container">Join us</a></li> -->
-    </ul>
+    </menu>
   </nav>
-  <div class="container" id="container">
-    <header>
-      <h1>
-        Ta-da!<br>
-        Your personalized quiz is ready for action.
-      </h1><br>
-      <p>
-        <b>QuizifyPDF</b> has generated your quiz in a matter of seconds. You can now share it with your audience,
-        students, or colleagues.
-      </p>
-    </header>
-    <section class="button_container">
-      <form action="/joinQuiz" method="post">
+  <header>
+    <h1>
+      Ta-da!<br>
+      Your personalized quiz is ready for action.
+    </h1><br>
+    <p>
+      <b>QuizifyPDF</b> has generated your quiz in a matter of seconds. You can now share it with your audience,
+      students, or colleagues.
+    </p>
+  </header>
+  <section class="button_container" tag="Scroll down to get the QR code of Quiz">
+    <form action="/joinQuiz" method="post">
         <button name="quizId" value="<%= id %>"  class="join_button">
           <p>Join the Quiz</p>
         </button>
-        <!-- <button class="edit_button">
-          <p>Edit the Quiz</p>
-        </button> -->
       </form>
     </section>
     <section>
-      <div class="master full_width">
-        Share this unique quiz-code with your audience, students, or colleagues. <div class="code"><%= id %> </div>
-        <br>
+      <div class="master full_width aos">
+        <h3>Scan to Open the Quiz</h3>
+        <div id="qrcode"></div>
+        Share this unique quiz-code with your audience, students, or colleagues. <div class="code"
+          tag="Click the code to copy it to clipboard">ftfuyt6tuguyguy</div>
       </div>
     </section>
-    <!-- <section class="contact">
-      <div class="full_width master" id="contact_container">
-        <h2>Join the Quiz Revolution Today !</h2>
-        <p>
-          Ready to transform the way you create quizzes? Join <b>QuizifyPDF</b> today and experience the simplicity of
-          turning PDFs into interactive quizzes. Elevate your content, engage your audience, and save valuable time.
-          Welcome to the future of quiz creation!
-        </p>
-      </div>
-    </section> -->
     <footer id="footer">
       <p>© 2023 QuizifyPDF</p>
-    </footer>
-  </div>
-</body>
+    </footer>  
+    <script defer src="https://kit.fontawesome.com/5a8048fc10.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="../js/quiz_home.js"></script>
+    <script src="../js/script.js"></script>
+  </body>
+  
+  </html>
 
 </html>

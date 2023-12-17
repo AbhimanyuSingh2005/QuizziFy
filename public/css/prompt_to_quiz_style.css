@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Doodle+Triangles&family=Ubuntu:wght@400;500&display=swap');
+
+
+:root {
+    --h2: Rubik Doodle Triangles;
+    --h3: Ubuntu;
+}
+
+form {
+    height: 90dvh;
+    width: 70%;
+    max-height: 90vh;
+    display: grid;
+    gap: 1em;
+    place-items: center;
+    margin: 2dvh auto;
+}
+
+form h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    /* text-decoration: underline; */
+    font-weight: 500;
+    font-family: var(--h2);
+}
+
+form .input_area {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+form h3 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    width: 100%;
+    margin-bottom: 1rem;
+    padding: 0em 4em;
+    font-family: var(--h3);
+}
+p{
+    font-family: var(--h3);
+}
+
+form .input_area textarea {
+    width: 100%;
+    /* height: 50%; */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 1rem;
+    font-size: 1.5rem;
+    font-family: 'Poppins', sans-serif;
+    resize: none;
+    outline: none;
+}
+
+form div textarea:focus {
+    border: 1px solid #000;
+}
+
+.difficulty {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1em;
+    margin: auto;
+}
+
+.difficulty div {
+    width: 60%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 1em;
+    margin: auto;
+
+}
+
+.difficulty h3 {
+    flex: 0 0 100%;
+}
+
+.difficulty input {
+    display: none;
+}
+
+.difficulty label {
+    cursor: pointer;
+    border: none;
+    padding: .5em 1em;
+    background-color: #82828246;
+}
+
+.difficulty input:checked+label {
+    background-color: rgb(35, 141, 255);
+    color: white;
+}
+
+form button {
+    border: none;
+    border-radius: 10px;
+    padding: 1.5em 4em;
+    box-shadow: 0 0 5px 2px rgb(125, 146, 155);
+    background-color: rgb(3, 88, 163);
+    color: white;
+    font-size: large;
+    font-weight: bold;
+    cursor: pointer;
+    bottom: 5%;
+}

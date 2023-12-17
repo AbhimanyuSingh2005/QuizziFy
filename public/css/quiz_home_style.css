@@ -3,6 +3,7 @@ header h1{
     font-size: xx-large;
 }
 header{
+    /* height: 40dvh; */
     padding: 5em 0;
     display: grid;
     place-items: center;
@@ -33,7 +34,7 @@ section div:is(.full_width) {
     background-color: rgb(228, 228, 228);
 }
 .code::after{
-    content: "Click the code to copy it to clipboard";
+    content:attr(tag);
     display: block;
     position: absolute;
     font-size: small;
@@ -42,11 +43,22 @@ section div:is(.full_width) {
     white-space: nowrap;
     top: 120%;
 }
+
 .button_container{
+    height: 52dvh;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     margin: 2em auto;
     gap: 1em;
+    position: relative;
+}
+.button_container::after{
+    content:attr(tag);
+    position: absolute;
+    font-weight: normal;
+    color: rgb(0, 0, 0);
+    white-space: nowrap;
+    top: 80%;
 }
 .button_container button{
     padding: 2em 4em;
@@ -61,4 +73,14 @@ section div:is(.full_width) {
  .button_container .edit_button{
     background-color: rgb(172, 209, 243);
     color: black;
+}
+#qrcode{
+    margin: 2em auto;
+    width: fit-content;
+    padding: 1em;
+    background-color: white;
+}
+h3{
+    width: 100%;
+    margin-bottom: 2em;
 }

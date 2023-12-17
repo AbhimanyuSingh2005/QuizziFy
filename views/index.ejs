@@ -13,20 +13,41 @@
 <body>
   <nav>
     <img src="/asset/img/logo2.png" alt="logo" class="logo" height="500" width="500">
-    <ul class="navlist">
+    <menu class="navlist">
       <li class="active"><a href="/">Introduction</a></li>
-      <li><a href="/pdfToQuiz">Make a Quiz</a></li>
+      <li>
+        <div class="dropdown">Make a Quiz</div>
+      </li>
+      <div class="dropdown_content">
+        <div>
+          <a href="/pdfToQuiz">
+            <i class="fa-solid fa-file-pdf"></i>
+            <p>Pdf To Quiz</p>
+          </a>
+        </div>
+        <div>
+          <a href="/prompt_to_quiz">
+            <i class="fa-solid fa-file-image"></i>
+            <p>Prompt To Quiz</p>
+          </a>
+        </div>
+        <div>
+          <a href="" class="under_process">
+            <i class="fa-solid fa-file-video"></i>
+            <p>Video To Quiz</p>
+          </a>
+        </div>
+      </div>
       <li class="nav_contact"><a href="#contact_container">Join us</a></li>
-    </ul>
+    </menu>
   </nav>
-  <div class="container" id="container">
     <header>
       <h1 id="heading">Welcome To <br>
         QuizifyPDF</h1>
       <img src="/asset/img/logo2.png" alt="logo" class="logo" height="500" width="500">
     </header>
     <section>
-      <div class="full_width master" >
+      <div class="full_width master aos">
         <h2>Join the Quiz !</h2>
         <label for="quizzid">Enter the unique Quiz code to enter the quiz !
         </label> <br>
@@ -36,8 +57,8 @@
         </form>
       </div>
     </section>
-    <section>
-      <div class="full_width">
+    <section> 
+      <div class="full_width aos">
         <h2>Unleash the Power of PDFs in Quiz Building !</h2>
         <p>
           Are you tired of the traditional and time-consuming process of creating quizzes? Look no further! <b>
@@ -45,7 +66,7 @@
           all you need is a PDF.
         </p>
       </div>
-      <div class="working">
+      <div class="working aos">
         <h2>How It Works?</h2>
         <p>
           <b>Upload Your PDF:</b> <br><br> Simply upload your PDF document containing questions and answers. Our
@@ -66,7 +87,7 @@
           your audience, students, or colleagues effortlessly.
         </p>
       </div>
-      <div>
+      <div class="aos">
         <h2>Why Choose QuizifyPdf?</h2>
         <p>
           <b>Versatility: </b> <br><br>Accept quizzes in various formats, making it easy to integrate with your existing
@@ -83,7 +104,7 @@
           protect your content and privacy.
         </p>
       </div>
-      <div>
+      <div class="aos">
         <h2>Who Can Benefit?</h2>
         <p>
           <b>Educators:</b> <br><br> Quickly generate quizzes for your students and focus on what matters - teaching.
@@ -99,7 +120,7 @@
       </div>
     </section>
     <section class="contact">
-      <div class="full_width master" id="contact_container">
+      <div class="full_width master aos" id="contact_container">
         <h2>Join the Quiz Revolution Today !</h2>
         <p>
           Ready to transform the way you create quizzes? Join <b>QuizifyPDF</b> today and experience the simplicity of
@@ -111,12 +132,12 @@
     <footer id="footer">
       <p>© 2023 QuizifyPDF</p>
     </footer>
-  </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.js"
     integrity="sha512-dfMpvQclalfL7nRtHdy4+U2GLYb2XJJOgGLgKibrbcbarI/ZLgCAaBCS6+AuWN0OtLn/zFpu+Cggd8TCBYx9Ag=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="/js/script.js"></script>
-  <script src="/js/index_script.js"></script>
+  <script defer src="../js/script.js"></script>
+  <script defer src="../js/index_script.js"></script>
+  <script defer src="https://kit.fontawesome.com/5a8048fc10.js" crossorigin="anonymous"></script>
 </body>
 
 </html>

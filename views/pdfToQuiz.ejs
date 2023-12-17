@@ -5,9 +5,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Quizzify | Make Quiz</title>
-  <link rel="shortcut icon" href="logo2.png" type="image/x-icon">
+  <link rel="shortcut icon" href="/asset/img/logo2.png" type="image/x-icon">
   <link rel="stylesheet" href="/css/style.css">
-  <link rel="stylesheet" href="/css/form_style.css">
+  <link rel="stylesheet" href="/css/pdf_to_quiz_style.css">
 </head>
 
 <body class="loader">
@@ -15,83 +15,99 @@
     <!-- <div class="loading"></div> -->
     <img src="asset/img/load.gif" height="200" width="auto" alt="">
     <p>Please wait ! You Quiz is being generated</p>
-</dialog>
+  </dialog>
   <nav>
     <img src="/asset/img/logo2.png" alt="logo" class="logo" height="500" width="500">
-    <ul class="navlist">
+    <menu class="navlist">
       <li><a href="/">Introduction</a></li>
-      <li class="active"><a href="/form">Make a Quiz</a></li>
-      <li class="nav_contact"><a href="#contact_container">Join us</a></li>
-    </ul>
-  </nav>
-  <div class="container" id="container">
-    <form class="hero_section" method="post" id="form" onsubmit="submit()" action="/createQuiz">
-      <div class="selection_area">
-        <div class="select_pdf">
-          <img src="https://www.pcworld.com/wp-content/uploads/2023/11/pdf-icon-2.jpg?quality=50&strip=all" alt=""
-            height="80px" width="100px">
-          <input type="file" name="pdf" id="pdf" accept=".pdf" onchange="pdfselected()" required>
-          <label for="pdf" class="select_button">
-            Select PDF
-          </label>
-          <p class="select_button_para">
-            or drag and drop pdf here
-          </p>
-        </div>
-        <div class="select_text">
-          <textarea name="quizContent" id="text" rows="10" placeholder="Enter the text if you don't have pdf" onchange="textentered()"></textarea>
-        </div>
-      </div>
-      <div class="submit_area">
-        <!-- <div>
-          <input type="radio" name="type" id="mcq" value="mcq" checked>
-          <label for="mcq">
-            MCQ
-          </label>
-        </div> -->
-        <!-- <div>
-          <input type="radio" name="type" id="tf" value="tf" checked>
-          <label for="tf">
-            True/False
-          </label>
-        </div> -->
+      <li>
+        <div class="dropdown">Make a Quiz</div>
+      </li class="active">
+      <div class="dropdown_content">
         <div>
-          <label for="index_start">
-            <!-- Enter the starting index -->
-            From Page
-          </label>
-          <input type="number" id="index_start" name="" disabled required>
-          <label for="index_end">
-            <!-- Enter the ending index -->
-            To Page
-          </label>
-          <input type="number" id="index_end" name="" disabled required>
-          <label for="difficulty">Set difficulty </label>
-          <input type="range" name="difficulty" id="difficulty" value="1" min="1" max="5" disabled required>
-          <p id="difficulty_value"></p>
+          <a href="/pdfToQuiz">
+            <i class="fa-solid fa-file-pdf"></i>
+            <p>Pdf To Quiz</p>
+          </a>
         </div>
-        <button type="submit" id="submit_button" class="submit_button" disabled>Submit</button>
+        <div>
+          <a href="/prompt_to_quiz">
+            <i class="fa-solid fa-file-image"></i>
+            <p>Prompt To Quiz</p>
+          </a>
+        </div>
+        <div>
+          <a href="" class="under_process">
+            <i class="fa-solid fa-file-video"></i>
+            <p>Video To Quiz</p>
+          </a>
+        </div>
       </div>
-    </form>
-    <section class="contact">
-      <div class="full_width master" id="contact_container">
-        <h2>Join the Quiz Revolution Today !</h2>
-        <p>
-          Ready to transform the way you create quizzes? Join <b>QuizifyPDF</b> today and experience the simplicity of
-          turning PDFs into interactive quizzes. Elevate your content, engage your audience, and save valuable time.
-          Welcome to the future of quiz creation!
+      <li class="nav_contact"><a href="#contact_container">Join us</a></li>
+    </menu>
+  </nav>
+  <form class="hero_section" method="post" id="form" onsubmit="submit()" action="/createQuiz">
+    <div class="selection_area">
+      <div class="select_pdf">
+        <img src="/asset/img/pdf-icon.webp" alt=""
+          height="80px" width="100px">
+        <input type="file" name="pdf" id="pdf" accept=".pdf" onchange="pdfselected()" required>
+        <label for="pdf" class="select_button">
+          Select PDF
+        </label>
+        <p class="select_button_para">
+          or drag and drop pdf here
         </p>
       </div>
-    </section>
-    <footer id="footer">
-      <p>© 2023 QuizifyPDF</p>
-    </footer>
-  </div>
-  <script src="js/script.js"></script>
-  <script src="/js/form_script.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.js"
+      <div class="select_text">
+        <textarea name="quizContent" id="text" rows="10" placeholder="Enter the text if you don't have pdf"
+          onchange="textentered()"></textarea>
+      </div>
+    </div>
+    <div class="submit_area">
+      <h2>PDF to QUIZ</h2>
+      <div class="toggle disabled">
+        <label for="index_start" class="index_start">
+          <!-- Enter the starting index -->
+          From Page
+        </label>
+        <input type="number" class="index_start" id="index_start" name="" required>
+        <label for="index_end" class="index_end">
+          <!-- Enter the ending index -->
+          To Page
+        </label>
+        <input type="number" class="index_end" id="index_end" name="" required>
+        <span class="difficulty_label">Set difficulty </span>
+        <span class="difficulty">
+          <!-- <button id="difficulty">Easy</button><button id="difficulty">Medium</button><button id="difficulty">Hard</button> -->
+          <input type="radio" name="difficulty" id="easy" required><label for="easy">Easy</label>
+          <input type="radio" name="difficulty" id="medium" required><label for="medium">Medium</label>
+          <input type="radio" name="difficulty" id="hard" required><label for="hard">Hard</label>
+        </span>
+      </div>
+      <button type="submit" id="submit_button" class="submit_button disabled">Generate</button>
+    </div>
+  </form>
+  <section class="contact">
+    <div class="full_width master" id="contact_container">
+      <h2>Join the Quiz Revolution Today !</h2>
+      <p>
+        Ready to transform the way you create quizzes? Join <b>QuizifyPDF</b> today and experience the simplicity of
+        turning PDFs into interactive quizzes. Elevate your content, engage your audience, and save valuable time.
+        Welcome to the future of quiz creation!
+      </p>
+    </div>
+  </section>
+  <footer id="footer">
+    <p>© 2023 QuizifyPDF</p>
+  </footer>
+  <script defer src="../js/script.js"></script>
+  <script defer src="../js/pdf_to_quiz_script.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.js"
     integrity="sha512-dfMpvQclalfL7nRtHdy4+U2GLYb2XJJOgGLgKibrbcbarI/ZLgCAaBCS6+AuWN0OtLn/zFpu+Cggd8TCBYx9Ag=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script defer src="https://kit.fontawesome.com/5a8048fc10.js" crossorigin="anonymous"></script>
+
 </body>
 
 </html>
