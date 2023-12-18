@@ -51,7 +51,8 @@ const {
       });
     
       const response = result.response;
-      const responseText = response.text().replace(/```/g, '');
+      let responseText = response.text().replace(/```/g, '');
+      responseText = responseText.replace(/json/g, '');
       console.log(responseText);
       const JSONResponse = JSON.parse(responseText); 
       return(JSONResponse);
@@ -66,7 +67,9 @@ const {
       });
     
       const response = result.response;
-      const responseText = response.text().replace(/```/g, '');
+      let responseText = response.text().replace(/```/g, '');
+      responseText = responseText.replace(/json/g, '');
+      console.log(responseText);
       const JSONResponse = JSON.parse(responseText); 
       return(JSONResponse);
     }
