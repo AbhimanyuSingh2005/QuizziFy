@@ -18,6 +18,10 @@ const quizSchema = new mongoose.Schema({
             answer:{
                 type:Number,
                 required:true
+            },
+            explanation:{
+                type:String,
+                required:true
             }
         }
     ]

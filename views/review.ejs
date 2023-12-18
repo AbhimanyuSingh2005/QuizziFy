@@ -46,18 +46,18 @@
         <div class="question_list_container">
             <div class="heading">Question List</div>
             <div class="question_list">
-                <% answer.forEach((ans,index)=>{ %>
-                    <% if(index == no-1) { %>
-                        <a href="">
+                <% answers.forEach((ans,index)=>{ %>
+                    <% if(ans==questions[index].answer) { %>
+                        <a href="/review?id=<%=id%>&r=<%=r%>&no=<%=index+1%>">
                         <div data="correct" class="question_list_item"><%= index+1 %></div>
                         </a>
                     <% } else if(ans==4) { %>
-                        <a href="/quiz?id=<%= id %>&no=<%= index+1 %>">
-                            <div data="wrong" class="question_list_item"><%= index+1 %></div>
+                        <a href="/review?id=<%=id%>&r=<%=r%>&no=<%=index+1%>">
+                            <div data="unanswered" class="question_list_item"><%= index+1 %></div>
                         </a>
                     <% } else{ %>
-                        <a href="/quiz?id=<%= id %>&no=<%= index+1 %>">
-                            <div data="unanswered" class="question_list_item"><%= index+1 %></div>
+                        <a href="/review?id=<%=id%>&r=<%=r%>&no=<%=index+1%>">
+                            <div data="wrong" class="question_list_item"><%= index+1 %></div>
                         </a>
                     <% } %>
                 <% }) %>
@@ -82,32 +82,51 @@
                 <div class="question_container">
                     <div class="question">
                         <div class="heading">Question <%= no  %> </div>
-                        <div class="question_text"><%= question %></div>
+                        <div class="question_text"><%= questions[no-1].question %></div>
                     </div>
-                    <div class="option_container">
-                        <div class="option">
-                            <input type="radio" name="answer" id="option_1" value="0" data-set="correct">
-                            <label for="option_1" class="option_text"> <%= options[0] %></label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" name="answer" id="option_2" value="1"  checked>
-                            <label for="option_2" class="option_text"> <%= options[1] %></label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" name="answer" id="option_3" value="2">
-                            <label for="option_3" class="option_text"> <%= options[2] %></label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" name="answer" id="option_4" value="3">
-                            <label for="option_4" class="option_text"> <%= options[3] %></label>
-                        </div>
+                    <div class="option_container">      
+                        <% questions[no-1].options.forEach((option,index)=>{ %>
+                            <% if(index==questions[no-1].answer&&answers[no-1]==index){ %>
+                                <div class="option">
+                                    <input type="radio" name="answer" id="option_<%= index+1 %>" value="<%= index %>" data-set="correct" checked>
+                                    <label for="option_<%= index+1 %>" class="option_text"> <%= option %></label>
+                                </div>
+                            <% } else if(index==questions[no-1].answer){ %>
+                                <div class="option">
+                                    <input type="radio" name="answer" id="option_<%= index+1 %>" value="<%= index %>" data-set="correct">
+                                    <label for="option_<%= index+1 %>" class="option_text"> <%= option %></label>
+                                </div>
+                            <% } else if(answers[no-1]==index){ %>
+                                <div class="option">
+                                    <input type="radio" name="answer" id="option_<%= index+1 %>" value="<%= index %>" data-set="wrong" checked>
+                                    <label for="option_<%= index+1 %>" class="option_text"> <%= option %></label>
+                                </div>
+                            <% } else{ %>
+                                <div class="option">
+                                    <input type="radio" name="answer" id="option_3" value="2">
+                                    <label for="option_3" class="option_text"> <%= option %></label>
+                                </div>
+                            <% } %>
+                            
+                        <% }) %>       
+                                        
                     </div>
                 </div>
                 <div class="button_container">
                     <% if(no!=10){ %>
-                        <button class="button next" type="button" id="prev_button">Next</button>
+                        <a href="/review?id=<%=id%>&r=<%=r%>&no=<%=no+1%>">
+                            <button class="button next" type="button" id="prev_button">Next</button>
+                        </a>
                     <% } %>
-                    <button type="button">Go Back</button>
+                    <% if(no!=1){ %>
+                        <a href="/review?id=<%=id%>&r=<%=r%>&no=<%=no-1%>">
+                            <button type="button">Go Back</button>
+                        </a>
+                    <% } %>
+                </div>
+                <div class="explanation">
+                    <h3>Explanation</h3>
+                    <p><%= questions[no-1].explanation %></p>
                 </div>
             </form>
                 

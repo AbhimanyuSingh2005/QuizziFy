@@ -46,22 +46,22 @@
       <li class="nav_contact"><a href="#contact_container">Join us</a></li>
     </menu>
   </nav>
-  <form class="hero_section" method="post" id="form" onsubmit="submit()" action="quiz_home.html">
+  <form class="hero_section" method="post" id="form" onsubmit="submit()" action="/createQuiz">
       <h2>Prompt to QUIZ </h2>
       <div class="input_area">
         <h3>Enter the prompt here !</h3>
-        <textarea name="prompt" id="prompt" cols="30" rows="10" resize="no"></textarea>
+        <textarea name="content" id="prompt" cols="30" rows="10" resize="no" required></textarea>
       </div>
       <div class="difficulty">
         <h3>Set difficulty !</h3>
         <div>
-          <input type="radio" name="difficulty" id="easy"><label for="easy">Easy</label>
-          <input type="radio" name="difficulty" id="medium"><label for="medium">Medium</label>
-          <input type="radio" name="difficulty" id="hard"><label for="hard">Hard</label>
+          <input type="radio" name="difficulty" id="easy" value="1"><label for="easy">Easy</label>
+          <input type="radio" name="difficulty" id="medium" value="2"><label for="medium">Medium</label>
+          <input type="radio" name="difficulty" id="hard" value="3"><label for="hard">Hard</label>
         </div>
       </div>
       <!-- <label for="prompt">Enter the</label>   -->
-      <button type="submit">Generate</button>
+      <button type="submit" name="promptType"id="submit_button" value="1">Generate</button>
   </form>
   <section class="contact">
     <div class="full_width master aos" id="contact_container">
@@ -78,9 +78,6 @@
   </footer>
   <script defer src="/js/script.js"></script>
   <script defer src="/js/prompt_to_quiz_script.js"></script>
-  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.js"
-    integrity="sha512-dfMpvQclalfL7nRtHdy4+U2GLYb2XJJOgGLgKibrbcbarI/ZLgCAaBCS6+AuWN0OtLn/zFpu+Cggd8TCBYx9Ag=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script defer src="https://kit.fontawesome.com/5a8048fc10.js" crossorigin="anonymous"></script>
 
 </body>

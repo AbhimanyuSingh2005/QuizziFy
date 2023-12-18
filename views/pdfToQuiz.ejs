@@ -31,7 +31,7 @@
           </a>
         </div>
         <div>
-          <a href="/prompt_to_quiz">
+          <a href="/promptToQuiz">
             <i class="fa-solid fa-file-image"></i>
             <p>Prompt To Quiz</p>
           </a>
@@ -80,12 +80,12 @@
         <span class="difficulty_label">Set difficulty </span>
         <span class="difficulty">
           <!-- <button id="difficulty">Easy</button><button id="difficulty">Medium</button><button id="difficulty">Hard</button> -->
-          <input type="radio" name="difficulty" id="easy" required><label for="easy">Easy</label>
-          <input type="radio" name="difficulty" id="medium" required><label for="medium">Medium</label>
-          <input type="radio" name="difficulty" id="hard" required><label for="hard">Hard</label>
+          <input type="radio" name="difficulty" id="easy" value="1" required><label for="easy">Easy</label>
+          <input type="radio" name="difficulty" id="medium" value="2" required><label for="medium">Medium</label>
+          <input type="radio" name="difficulty" id="hard" value="3" required><label for="hard">Hard</label>
         </span>
       </div>
-      <button type="submit" id="submit_button" class="submit_button disabled">Generate</button>
+      <button type="submit" id="submit_button" class="submit_button disabled" name="promptType" value="0">Generate</button>
     </div>
   </form>
   <section class="contact">

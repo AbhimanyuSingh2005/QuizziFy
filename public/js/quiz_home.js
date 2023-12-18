@@ -1,7 +1,7 @@
 const code = document.querySelector(".code");
 code.addEventListener("click", copy);
-let copyText = document.querySelector(".join_button").value;
-
+let copyText = document.querySelector(".code").textContent;
+let url = `https://quizzifypdf.onrender.com/quiz?id=${copyText}&no=1`;
 function copy() {
     // copyText.select();
     // copyText.setSelectionRange(0, 99999);
@@ -11,7 +11,7 @@ function copy() {
 }
 
 var qrcode = new QRCode("qrcode", {
-    text: copyText,
+    text: url,
     width: 256,
     height: 256,
 	colorLight : "#ffffff",

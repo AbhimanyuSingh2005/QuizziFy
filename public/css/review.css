@@ -19,3 +19,9 @@
 .question_list>a>div[data="unanswered"] {
     background-color: var(--unanswered-color);
 }
+.explanation p{
+    color: rgb(68, 68, 68)
+}
+.explanation h3{
+    padding: 1em;
+}

@@ -118,6 +118,7 @@ textarea {
 .disabled {
   opacity: .3;
   cursor: not-allowed;
+  -webkit-user-select: none;
   user-select: none;
   -webkit-user-drag: none;
 }
@@ -125,6 +126,7 @@ textarea {
 .disabled * {
   cursor: not-allowed;
   pointer-events: none;
+  -webkit-user-select: none;
   user-select: none;
   -webkit-user-drag: none;
 }
@@ -262,6 +264,7 @@ div h2 {
   border: none;
   box-shadow: 0px 0px 20px 0px #00000046;
   color: white;
+  -webkit-user-select: none;
   user-select: none;
 }
 

@@ -20,14 +20,16 @@ body {
     background-color: aliceblue;
 }
 
-section .aos:is(.full_width),section .aos:is(.full_width) * {
+section .aos:is(.full_width),
+section .aos:is(.full_width) * {
     opacity: 0;
     transform: translateY(50px);
     filter: blur(5px);
     transition: all .5s ease-in-out;
 }
 
-section .show:is(.full_width),section .show:is(.full_width) * {
+section .show:is(.full_width),
+section .show:is(.full_width) * {
     opacity: 1;
     filter: none;
     transform: translateY(0px);
@@ -146,18 +148,8 @@ nav img {
     padding: .5em 1em;
 }
 
-.navlist li:is(.active:not(:has(div))) {
-    background: rgb(255, 255, 255);
-    border-radius: 8px;
-    box-shadow: 0 0 5px 2px rgb(125, 146, 155);
-    transition: box-shadow .5s;
-}
 
 .navlist li:is(.active:has(div)) div {
-    background: rgb(255, 255, 255);
-    border-radius: 8px;
-    box-shadow: 0 0 5px 2px rgb(125, 146, 155);
-    transition: box-shadow .5s;
     font-family: var(--h3);
 }
 
@@ -176,13 +168,45 @@ nav img {
 .dropdown {
     padding: 0px;
     transition: all .5s .1s;
+    position: relative;
 }
 
-.navlist:has(.dropdown:hover, .dropdown_content:hover) .dropdown {
-    transition: all .5s .1s;
-    background: rgb(255, 255, 255);
+.navlist li {
+    position: relative;
+    overflow: hidden;
+}
+
+.navlist li:is(.active)::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0%;
+    width: 100%;
+    height: 5px;
+    transition: all .5s;
+    background: rgb(27, 27, 27);
     border-radius: 8px;
-    box-shadow: 0 0 5px 2px rgb(125, 146, 155);
+}
+
+.navlist .dropdown::after,
+.navlist li:not(:has(div))::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 100%;
+    width: 0%;
+    height: 5px;
+    transition: all .5s;
+    background: rgb(27, 27, 27);
+    border-radius: 8px;
+    /* box-shadow: 0 0 5px 2px rgb(125, 146, 155); */
+}
+
+.navlist:has(.dropdown:hover, .dropdown_content:hover) .dropdown::after,
+.navlist li:hover::after {
+    left: 0;
+    width: 100%;
+    transition: width .5s;
 }
 
 .navlist:has(.dropdown:hover) .dropdown_content,

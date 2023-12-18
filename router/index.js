@@ -22,6 +22,12 @@ router.get('/pdfToQuiz', (req, res) => {
     res.render('pdfToQuiz');
 });
 
+//////////////////////////////////////////////// Get Route to Create quiz from Prompt /////////////////////////////////////////////////
+
+router.get('/promptToQuiz', (req, res) => {
+    res.render('promptToQuiz');
+});
+
 //////////////////////////////////////////////// Get Route to Quiz Home Page after creation of Quiz /////////////////////////////////////////////////
 router.get('/quizHome', (req, res) => {
     res.render('quiz_home', { id: req.query.id });
@@ -29,13 +35,9 @@ router.get('/quizHome', (req, res) => {
 
 //////////////////////////////////////////////// Get Route to Quiz Platform /////////////////////////////////////////////////
 router.get('/quiz', async (req, res) => {
-    // console.log(req.query.id);
-    // console.log(req.query.no);
     if(req.query.no>0&&req.query.no<11){
         const quiz = await Quiz.findOne({ quizId: req.query.id });
         const ques = quiz.questions[req.query.no - 1];
-        // const resultId = req.query.r;
-        // const answer = quiz.leaderboard.find((result) => result.resultId == resultId).answer;   //finding answer from leaderboard
         res.render('quiz_platform',
             {
                 question: ques.question, 
@@ -43,7 +45,7 @@ router.get('/quiz', async (req, res) => {
                 no: parseFloat(req.query.no), 
                 id: req.query.id, 
                 answer: answer,
-                // resultId:resultId
+
             }
         );
     }else{
@@ -54,26 +56,33 @@ router.get('/quiz', async (req, res) => {
 //////////////////////////////////////////////// Get Route to Score /////////////////////////////////////////////////
 router.get('/score', async (req, res) => { 
     const result = await Result.findOne({ resultID: req.query.r });
-    // console.log(result);
     const score = result.score;
     const results =  await Result.find({ quizId: req.query.id });
     results.sort((a,b)=>b.score-a.score);
     const leaderboard = results.slice(0,10);
-    // console.log(leaderboard);
-    res.render('result', { score: score ,leaderboard:leaderboard});
+    res.render('result', { score: score ,leaderboard:leaderboard, id: req.query.id, r: req.query.r});
 });
 
+//////////////////////////////////////////////// Get Route to Review Your Answer /////////////////////////////////////////////////
+
+router.get('/review', async (req, res) => {
+    const result = await Result.findOne({ resultID: req.query.r });
+    const quiz = await Quiz.findOne({ quizId: req.query.id }); 
+    const answers = result.answer;
+    res.render('review', { id: req.query.id, r: req.query.r, questions: quiz.questions, answers: answers,no:parseFloat(req.query.no)});
+});
 //////////////////////////////////////////////// Post Route to create Quiz form Pdf/////////////////////////////////////////////////
 router.post('/createQuiz', async (req, res) => {
     const content = req.body.quizContent;
     const difficulty = req.body.difficulty;
-    const quiz = await run(content, difficulty);
+    const promptType = req.body.promptType;
+    // console.log(req.body);
+    const quiz = await run(content, difficulty,promptType);
     const quizId = uuidv4();
     quiz.quizId = quizId;
     const newQuiz = new Quiz(quiz);
     try {
         await newQuiz.save();
-        // answer =  [5,5,5,5,5,5,5,5,5,5]; 
         res.redirect(url.format({
             pathname: "/quizHome",
             query: {

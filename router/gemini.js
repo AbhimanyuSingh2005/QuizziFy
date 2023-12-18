@@ -10,7 +10,7 @@ const {
   const MODEL_NAME = "gemini-pro";
   const API_KEY = process.env.GEMINIAPIKEY;
   
-  async function run(content, difficultyLevel ) {
+  async function run(content, difficultyLevel,promptType ) {
     const genAI = new GoogleGenerativeAI(API_KEY);
     const model = genAI.getGenerativeModel({ model: MODEL_NAME });
   
@@ -40,19 +40,36 @@ const {
       },
     ];
   
-    const parts = [
-      {text: `Create a 10-question multiple-choice quiz based on the following text passage, if difficulty level of question is measured from 1-3 where \ndifficulty 1 means easy. Questions should be straightforward and Its answer should be one word.\ndifficulty 2 means moderate and should be tougher than previous difficulty and less than next difficulty. It should be mix of both difficulty.\ndifficulty 3 means harder and questions should not be straightforward and option can be of a sentence. Model can add question from its own knowledge related to topic in content.\n\nthen target difficulty level of question is  ${difficultyLevel}.\n\nContent of quiz is:\n\n${content}\n\nPlease provide the questions in JSON format with each question having the following fields: question, options, and answer. The options should be an array of four choices, and the answer should be the index of the correct answer within the options array.\n\nFormat of JSON object should be :\n{\n        questions: [\n            {\n              question: \"requested question\",\n              options: \"array of options\",\n              answer: \"index of correct answer in options array\"\n            }\n          ]\n    };\n`},
-    ];
-  
-    const result = await model.generateContent({
-      contents: [{ role: "user", parts }],
-      generationConfig,
-      safetySettings,
-    });
-  
-    const response = result.response;
-    const JSONResponse = JSON.parse(response.text()); 
-    return(JSONResponse);
+    if(promptType == 1){
+      const parts = [
+        {text: `Create a 10-question multiple-choice quiz based on  following topic, if difficulty level of question is measured from 1-3 where \ndifficulty 1 means easy. Questions should be straightforward and Its answer should be one word.\ndifficulty 2 means moderate and should be tougher than previous difficulty and less than next difficulty. It should be mix of both difficulty.\ndifficulty 3 means harder and questions should not be straightforward and option can be of a sentence.\n\nthen target difficulty level of question is  ${difficultyLevel}.\n\nTopic of quiz is given below:\n\n\ ${content}\n\n\n\nPlease provide the questions in JSON format with each question having the following fields: question, options, answer and explanation to why answer is correct. The options should be an array of four choices, and the answer should be the index of the correct answer within the options array.\nFormat of JSON object should be :   \nquestions: [\n            {\n              question: \\\"requested question\\\",\n              options: \\\"array of options\\\",\n              answer: \\\"index of correct answer in options array\\\"\n\t\t\t  explanation:\\\"explain the reason why answer is correct\\\"\n           }\n          ]\n    };\n`}
+      ];
+      const result = await model.generateContent({
+        contents: [{ role: "user", parts }],
+        generationConfig,
+        safetySettings,
+      });
+    
+      const response = result.response;
+      const responseText = response.text().replace(/```/g, '');
+      console.log(responseText);
+      const JSONResponse = JSON.parse(responseText); 
+      return(JSONResponse);
+    }else{
+      const parts = [
+        {text: `Create a 10-question multiple-choice quiz based on the following text passage, if difficulty level of question is measured from 1-3 where \ndifficulty 1 means easy. Questions should be straightforward and Its answer should be one word.\ndifficulty 2 means moderate and should be tougher than previous difficulty and less than next difficulty. It should be mix of both difficulty.\ndifficulty 3 means harder and questions should not be straightforward and option can be of a sentence. Model can add question from its own knowledge related to topic in content.\n\nthen target difficulty level of question is  ${difficultyLevel}.\n\nContent of quiz is:\n\n${content}\n\nPlease provide the questions in JSON format with each question having the following fields: question, options, answer and explanation to why answer is correct. The options should be an array of four choices, and the answer should be the index of the correct answer within the options array.\nFormat of JSON object should be :   \nquestions: [\n            {\n              question: \\\"requested question\\\",\n              options: \\\"array of options\\\",\n              answer: \\\"index of correct answer in options array\\\"\n\t\t\t  explanation:\\\"explain the reason why answer is correct\\\"\n           }\n          ]\n    };\n`}
+      ];
+      const result = await model.generateContent({
+        contents: [{ role: "user", parts }],
+        generationConfig,
+        safetySettings,
+      });
+    
+      const response = result.response;
+      const responseText = response.text().replace(/```/g, '');
+      const JSONResponse = JSON.parse(responseText); 
+      return(JSONResponse);
+    }
   }
   
 module.exports = run;
